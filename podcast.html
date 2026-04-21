@@ -354,6 +354,107 @@ body {
   font-size: 13px;
   color: #4a5a7a;
 }
+
+/* VOICE SETTINGS */
+.voice-btn {
+  display: block;
+  width: 100%;
+  background: #1a2238;
+  border: 1px dashed #2a3a5a;
+  color: #6a7a9a;
+  font-size: 12px;
+  padding: 7px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: border-color 0.15s, color 0.15s;
+}
+.voice-btn:hover { border-color: #ff9900; color: #ff9900; }
+
+.voice-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 300;
+  align-items: flex-end;
+  justify-content: center;
+}
+.voice-modal.visible { display: flex; }
+.voice-modal-inner {
+  background: #111827;
+  border: 1px solid #2a3a6a;
+  border-radius: 18px 18px 0 0;
+  padding: 20px 16px 30px;
+  width: 100%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+.voice-modal h3 {
+  font-size: 15px;
+  font-weight: 700;
+  color: #ff9900;
+  margin-bottom: 4px;
+}
+.voice-modal .vm-sub {
+  font-size: 11px;
+  color: #4a5a7a;
+  margin-bottom: 16px;
+}
+.voice-row {
+  margin-bottom: 12px;
+}
+.voice-row label {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  margin-bottom: 5px;
+}
+.voice-row label.lbl-host { color: #ff9900; }
+.voice-row label.lbl-interviewer { color: #64b5f6; }
+.voice-row label.lbl-answer { color: #69f0ae; }
+.voice-row label.lbl-tip { color: #ce93d8; }
+.voice-row select {
+  width: 100%;
+  background: #1a2238;
+  border: 1px solid #2a3a5a;
+  color: #c8d0e0;
+  font-size: 12px;
+  padding: 7px 10px;
+  border-radius: 8px;
+  outline: none;
+  cursor: pointer;
+}
+.voice-row select:focus { border-color: #ff9900; }
+.vm-btns {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
+}
+.vm-test {
+  flex: 1;
+  background: #1a2a3a;
+  border: 1px solid #448aff;
+  color: #64b5f6;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.vm-done {
+  flex: 1;
+  background: #ff9900;
+  border: none;
+  color: #000;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+}
 </style>
 </head>
 <body>
@@ -412,6 +513,9 @@ body {
       <button class="speed-btn" onclick="setSpeed(1.25)">1.25×</button>
       <button class="speed-btn" onclick="setSpeed(1.5)">1.5×</button>
     </div>
+
+    <!-- Voice settings button -->
+    <button class="voice-btn" onclick="openVoiceSettings()">🎤 Change Voices 揀聲音</button>
   </div>
 
   <!-- Legend -->
@@ -426,6 +530,34 @@ body {
 <!-- EPISODE LIST -->
 <div class="ep-list-label">All Episodes — 所有集數</div>
 <div class="ep-list" id="ep-list"></div>
+
+<!-- VOICE SETTINGS MODAL -->
+<div class="voice-modal" id="voice-modal">
+  <div class="voice-modal-inner">
+    <h3>🎤 Voice Settings 揀聲音</h3>
+    <div class="vm-sub">為每個角色揀唔同聲音，令聆聽更自然 · Pick a voice for each role</div>
+    <div class="voice-row">
+      <label class="lbl-host">🟡 Host / Narrator 旁白</label>
+      <select id="voice-host" onchange="voicePrefs.host=this.value"></select>
+    </div>
+    <div class="voice-row">
+      <label class="lbl-interviewer">🔵 Interviewer — Amazon 面試官</label>
+      <select id="voice-interviewer" onchange="voicePrefs.interviewer=this.value"></select>
+    </div>
+    <div class="voice-row">
+      <label class="lbl-answer">🟢 Your Answer 你嘅答案</label>
+      <select id="voice-answer" onchange="voicePrefs.answer=this.value"></select>
+    </div>
+    <div class="voice-row">
+      <label class="lbl-tip">🟣 Key Tip 重點提示</label>
+      <select id="voice-tip" onchange="voicePrefs.tip=this.value"></select>
+    </div>
+    <div class="vm-btns">
+      <button class="vm-test" onclick="testVoices()">▶ Test All Voices 試聲</button>
+      <button class="vm-done" onclick="closeVoiceSettings()">Done ✓ 完成</button>
+    </div>
+  </div>
+</div>
 
 <!-- DRIVE MODE BUTTON -->
 <button class="drive-mode-btn" onclick="enterDriveMode()">🚗 Drive Mode</button>
@@ -721,9 +853,63 @@ let synth = window.speechSynthesis;
 let voices = [];
 let doneEpisodes = new Set();
 
+// Voice preferences — names of selected voices per role
+let voicePrefs = { host: null, interviewer: null, answer: null, tip: null };
+
+// Voices to exclude (joke/novelty macOS voices)
+const JOKE_VOICES = ['Bad News','Bahh','Bells','Boing','Bubbles','Cellos','Superstar',
+  'Trinoids','Whisper','Junior','Jester','Organ','Ralph','Good News','Wobble',
+  'Zarvox','Pipe Organ','Deranged','Hysterical','Tinkle','Gitta','Paulina'];
+
+function getGoodVoices() {
+  return voices.filter(v =>
+    v.lang.startsWith('en') &&
+    !JOKE_VOICES.some(j => v.name.startsWith(j))
+  );
+}
+
+function setDefaultVoices() {
+  const good = getGoodVoices();
+  const gb = good.filter(v => v.lang === 'en-GB');
+  const us = good.filter(v => v.lang === 'en-US');
+  const all = [...gb, ...us, ...good];
+
+  const find = (names) => {
+    for (const n of names) {
+      const v = all.find(v => v.name === n);
+      if (v) return v.name;
+    }
+    return all[0]?.name;
+  };
+
+  voicePrefs.host        = find(['Flo (English (United Kingdom))','Shelley (English (United Kingdom))','Sandy (English (United Kingdom))','Samantha']);
+  voicePrefs.interviewer = find(['Daniel','Reed (English (United Kingdom))','Grandpa (English (United Kingdom))','Fred','Albert']);
+  voicePrefs.answer      = find(['Reed (English (United Kingdom))','Rocko (English (United Kingdom))','Eddy (English (United Kingdom))','Daniel']);
+  voicePrefs.tip         = find(['Karen','Moira','Tessa','Flo (English (United States))','Samantha']);
+}
+
+function populateVoiceSelects() {
+  const good = getGoodVoices();
+  ['host','interviewer','answer','tip'].forEach(role => {
+    const sel = document.getElementById('voice-' + role);
+    if (!sel) return;
+    sel.innerHTML = '';
+    good.forEach(v => {
+      const opt = document.createElement('option');
+      opt.value = v.name;
+      opt.textContent = v.name + '  (' + v.lang + ')';
+      if (v.name === voicePrefs[role]) opt.selected = true;
+      sel.appendChild(opt);
+    });
+  });
+}
+
 // Load voices
 function loadVoices() {
   voices = synth.getVoices();
+  if (voices.length && !voicePrefs.host) {
+    setDefaultVoices();
+  }
 }
 loadVoices();
 if (speechSynthesis.onvoiceschanged !== undefined) {
@@ -731,27 +917,47 @@ if (speechSynthesis.onvoiceschanged !== undefined) {
 }
 
 function getVoice(role) {
-  // Try to get distinct voices for different roles
-  const enVoices = voices.filter(v => v.lang.startsWith('en'));
-  const ukVoices = enVoices.filter(v => v.lang === 'en-GB');
-  const usVoices = enVoices.filter(v => v.lang === 'en-US');
-  const allEn = [...ukVoices, ...usVoices, ...enVoices];
+  const name = voicePrefs[role];
+  if (name) {
+    const v = voices.find(v => v.name === name);
+    if (v) return v;
+  }
+  // fallback
+  const good = getGoodVoices();
+  return good[0] || voices[0] || null;
+}
 
-  if (role === 'interviewer') {
-    // Try to find a male/different voice
-    const male = allEn.find(v => v.name.includes('Male') || v.name.includes('Daniel') || v.name.includes('David') || v.name.includes('Google UK English Male'));
-    return male || (allEn[1] || allEn[0] || null);
+function openVoiceSettings() {
+  populateVoiceSelects();
+  document.getElementById('voice-modal').classList.add('visible');
+}
+
+function closeVoiceSettings() {
+  document.getElementById('voice-modal').classList.remove('visible');
+}
+
+function testVoices() {
+  synth.cancel();
+  const tests = [
+    { role:'host',        text:'Hello, I am your host and narrator for this podcast.' },
+    { role:'interviewer', text:'Tell me about yourself and why you applied for AFP.' },
+    { role:'answer',      text:'My name is Eric. I am co-director of Lionrock Haulage Limited.' },
+    { role:'tip',         text:'Key tip: Mention your CPC qualification early. It builds instant credibility.' },
+  ];
+  let i = 0;
+  function next() {
+    if (i >= tests.length) return;
+    const t = tests[i++];
+    const cfg = getRoleConfig(t.role);
+    const voice = getVoice(t.role);
+    const u = new SpeechSynthesisUtterance(t.text);
+    u.rate = speechRate * cfg.rateAdj;
+    u.pitch = cfg.pitch;
+    if (voice) u.voice = voice;
+    u.onend = next;
+    synth.speak(u);
   }
-  if (role === 'answer') {
-    const ukMale = ukVoices.find(v => v.name.includes('Male') || v.name.includes('Daniel'));
-    return ukMale || ukVoices[0] || allEn[0] || null;
-  }
-  if (role === 'tip') {
-    const female = allEn.find(v => v.name.includes('Female') || v.name.includes('Serena') || v.name.includes('Google UK English Female') || v.name.includes('Karen'));
-    return female || allEn[allEn.length - 1] || null;
-  }
-  // host
-  return allEn[0] || null;
+  next();
 }
 
 function getRoleConfig(role) {
