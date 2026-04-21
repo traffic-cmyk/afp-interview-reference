@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🚛 Lionrock Haulage — AFP Interview Reference</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #0f1117;
+    color: #e8eaf0;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  /* HEADER */
+  .header {
+    background: linear-gradient(135deg, #232f3e 0%, #1a252f 100%);
+    border-bottom: 3px solid #ff9900;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .header h1 { font-size: 16px; color: #ff9900; letter-spacing: 0.5px; }
+  .header .sub { font-size: 11px; color: #8892a4; margin-top: 2px; }
+  .badge {
+    background: #ff9900;
+    color: #000;
+    font-weight: 700;
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 20px;
+  }
+
+  /* LAYOUT */
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px;
+    padding: 8px;
+  }
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    padding: 0 8px 8px;
+  }
+  .full {
+    padding: 0 8px 8px;
+  }
+
+  /* CARDS */
+  .card {
+    background: #1c2030;
+    border: 1px solid #2a3048;
+    border-radius: 8px;
+    padding: 10px 12px;
+  }
+  .card.amber { border-left: 3px solid #ff9900; }
+  .card.green  { border-left: 3px solid #00c853; }
+  .card.blue   { border-left: 3px solid #448aff; }
+  .card.red    { border-left: 3px solid #ff5252; }
+  .card.purple { border-left: 3px solid #ce93d8; }
+  .card.teal   { border-left: 3px solid #26c6da; }
+
+  .card h2 {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 2px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .card h2-cn {
+    display: block;
+    font-size: 10px;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0;
+    margin-bottom: 7px;
+    opacity: 0.6;
+  }
+  .card.amber h2 { color: #ff9900; }
+  .card.green  h2 { color: #00c853; }
+  .card.blue   h2 { color: #448aff; }
+  .card.red    h2 { color: #ff5252; }
+  .card.purple h2 { color: #ce93d8; }
+  .card.teal   h2 { color: #26c6da; }
+  .card.amber .h2-cn { color: #ff9900; }
+  .card.green  .h2-cn { color: #00c853; }
+  .card.blue   .h2-cn { color: #448aff; }
+  .card.purple .h2-cn { color: #ce93d8; }
+  .card.teal   .h2-cn { color: #26c6da; }
+
+  ul { padding-left: 14px; }
+  li { margin-bottom: 3px; color: #c8cdd8; }
+  li strong { color: #fff; }
+
+  /* Q&A TABLE */
+  .qa { width: 100%; border-collapse: collapse; }
+  .qa tr { border-bottom: 1px solid #2a3048; }
+  .qa tr:last-child { border-bottom: none; }
+  .qa td { padding: 6px 6px; vertical-align: top; }
+  .qa td:first-child {
+    width: 35%;
+    color: #ff9900;
+    font-weight: 600;
+    font-size: 12px;
+  }
+  .qa td:first-child .q-cn {
+    display: block;
+    color: #8892a4;
+    font-size: 10px;
+    font-weight: 400;
+    margin-top: 1px;
+  }
+  .qa td:last-child { color: #c8cdd8; font-size: 12px; }
+  .qa td:last-child ul { padding-left: 12px; margin: 0; }
+  .qa td:last-child li { margin-bottom: 2px; font-size: 11.5px; color: #c8cdd8; }
+  .qa td:last-child li strong { color: #fff; }
+
+  /* STAR INLINE TAGS */
+  .star-row { display: flex; gap: 5px; align-items: baseline; margin-bottom: 3px; line-height: 1.4; }
+  .star-row:last-child { margin-bottom: 0; }
+  .stag {
+    display: inline-block;
+    font-size: 9px;
+    font-weight: 900;
+    padding: 1px 4px;
+    border-radius: 3px;
+    min-width: 14px;
+    text-align: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .stag.s { background: #1a3a5c; color: #64b5f6; }
+  .stag.t { background: #2a2a1a; color: #ffcc02; }
+  .stag.a { background: #1a3a1a; color: #69f0ae; }
+  .stag.r { background: #3a1a1a; color: #ff6e6e; }
+  .star-text { font-size: 11.5px; color: #c8cdd8; }
+  .star-text strong { color: #fff; }
+  .star-cn { font-size: 10px; color: #6a7a8a; display: block; margin-left: 19px; margin-bottom: 2px; }
+
+  /* STAR BOX */
+  .star-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 6px;
+    margin-top: 6px;
+  }
+  .star-item {
+    background: #232b3e;
+    border-radius: 6px;
+    padding: 6px 8px;
+    text-align: center;
+  }
+  .star-letter {
+    font-size: 22px;
+    font-weight: 900;
+    color: #ff9900;
+    line-height: 1;
+  }
+  .star-word { font-size: 10px; color: #ff9900; font-weight: 700; margin: 2px 0 0; }
+  .star-word-cn { font-size: 10px; color: #8892a4; margin: 1px 0 2px; }
+  .star-desc { font-size: 9.5px; color: #8892a4; }
+
+  /* PRINCIPLES */
+  .lp-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px;
+  }
+  .lp-item {
+    background: #232b3e;
+    border-radius: 5px;
+    padding: 5px 8px;
+    display: flex;
+    gap: 6px;
+    align-items: flex-start;
+  }
+  .lp-num {
+    color: #ff9900;
+    font-weight: 700;
+    font-size: 11px;
+    min-width: 16px;
+  }
+  .lp-text { font-size: 11px; color: #c8cdd8; }
+  .lp-text strong { color: #fff; display: block; }
+  .lp-text .lp-cn { color: #8892a4; font-size: 10px; display: block; margin-bottom: 1px; }
+  .lp-text span { color: #8892a4; font-size: 10px; }
+
+  /* HIGHLIGHT BOX */
+  .highlight {
+    background: #1e2a1a;
+    border: 1px solid #00c853;
+    border-radius: 6px;
+    padding: 8px 12px;
+    color: #a5d6a7;
+    font-size: 12px;
+    margin-top: 6px;
+    font-style: italic;
+  }
+  .highlight strong { color: #00c853; font-style: normal; }
+
+  /* KEY STORIES */
+  .story {
+    background: #232b3e;
+    border-radius: 6px;
+    padding: 7px 10px;
+    margin-bottom: 5px;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .story-icon { font-size: 18px; min-width: 24px; }
+  .story-title { color: #ff9900; font-weight: 700; font-size: 12px; }
+  .story-title-cn { color: #8892a4; font-size: 10px; margin-top: 1px; margin-bottom: 2px; }
+  .story-uses { color: #8892a4; font-size: 11px; margin-top: 2px; }
+
+  /* DIVIDERS */
+  .section-label {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #4a5568;
+    padding: 4px 8px 2px;
+  }
+
+  /* ROLES */
+  .roles {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+    margin-top: 6px;
+  }
+  .role {
+    background: #232b3e;
+    border-radius: 6px;
+    padding: 7px 10px;
+  }
+  .role-name { color: #ff9900; font-weight: 700; font-size: 13px; }
+  .role-title { color: #26c6da; font-size: 11px; margin: 2px 0; }
+  .role-title-cn { color: #8892a4; font-size: 10px; margin: 1px 0 3px; }
+  .role-items { color: #8892a4; font-size: 11px; }
+
+  /* CLOSING */
+  .closing {
+    background: linear-gradient(135deg, #1a1f0a, #0f1a0a);
+    border: 1px solid #00c853;
+    border-radius: 8px;
+    padding: 10px 14px;
+    text-align: center;
+  }
+  .closing p {
+    color: #a5d6a7;
+    font-size: 12px;
+    font-style: italic;
+    line-height: 1.7;
+  }
+  .closing strong { color: #00c853; font-style: normal; }
+  .closing .cn { color: #5a7a5a; font-size: 11px; margin-top: 5px; font-style: normal; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div>
+    <h1>🚛 Lionrock Haulage Ltd — Amazon AFP Interview</h1>
+    <div class="sub">Eric (財務總監 Financial Director) &amp; Luca (持牌運輸主任 Licensed Transport Manager / CPC)</div>
+  </div>
+  <div class="badge">2R: Reliable &amp; Responsible 可靠 · 負責</div>
+</div>
+
+<!-- ROW 1: WHO / STORIES / STAR -->
+<div class="grid">
+
+  <!-- WHO YOU ARE -->
+  <div class="card amber">
+    <h2>👤 Who You Are</h2>
+    <span class="h2-cn" style="display:block;font-size:10px;opacity:0.7;margin-bottom:7px;">你係邊個</span>
+    <div class="roles">
+      <div class="role">
+        <div class="role-name">Luca</div>
+        <div class="role-title">Licensed Transport Manager (CPC)</div>
+        <div class="role-title-cn">持牌運輸主任 / CPC 持有人</div>
+        <div class="role-items">• Transport law 運輸法規<br>• Vehicle maintenance 車輛維修<br>• Road safety 道路安全<br>• Driver hours 司機工時<br>• HGV Licensed ✅</div>
+      </div>
+      <div class="role">
+        <div class="role-name">Eric</div>
+        <div class="role-title">Financial Director</div>
+        <div class="role-title-cn">財務總監</div>
+        <div class="role-items">• P&amp;L management 損益管理<br>• Driver coordination 司機統籌<br>• Operations 運營<br>• HGV Licensed ✅</div>
+      </div>
+    </div>
+    <div class="highlight" style="margin-top:8px;">
+      <strong>Two-person company = Total Ownership 兩人公司 = 全責</strong><br>
+      "There is nowhere to hide — Everything is personal."<br>
+      <span style="font-size:10px;color:#5a9a5a;">冇地方可以藏 — 每件事都係我地親身負責</span>
+    </div>
+  </div>
+
+  <!-- KEY STORIES -->
+  <div class="card green">
+    <h2>⭐ Your 3 King Stories — Use Everywhere</h2>
+    <span class="h2-cn" style="display:block;font-size:10px;opacity:0.7;margin-bottom:7px;">3 個核心故事 — 到處可用</span>
+    <div class="story">
+      <div class="story-icon">🎄</div>
+      <div>
+        <div class="story-title">Evri Warrington — Christmas 2024 24/7</div>
+        <div class="story-title-cn">聖誕峰期 24/7 無間斷運作</div>
+        <div class="story-uses">✦ Deliver Results · Bias for Action · Ownership · High Standards · Customer Obsession</div>
+      </div>
+    </div>
+    <div class="story">
+      <div class="story-icon">🚗</div>
+      <div>
+        <div class="story-title">Directors as Backup Drivers</div>
+        <div class="story-title-cn">老闆親自頂替司機出車</div>
+        <div class="story-uses">✦ Ownership · Deliver Results · Have Backbone · High Standards · Think Big</div>
+      </div>
+    </div>
+    <div class="story">
+      <div class="story-icon">⚡</div>
+      <div>
+        <div class="story-title">Relay + Tesco/Heinz/Maritime/WS while waiting</div>
+        <div class="story-title-cn">等候批核期間積極建立業務</div>
+        <div class="story-uses">✦ Bias for Action · Think Big · Frugality · Learn &amp; Be Curious</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STAR METHOD -->
+  <div class="card blue">
+    <h2>⭐ STAR Method — Every Behaviour Question</h2>
+    <span class="h2-cn" style="display:block;font-size:10px;opacity:0.7;margin-bottom:5px;">每條行為問題都用 STAR 答</span>
+    <div class="star-grid">
+      <div class="star-item">
+        <div class="star-letter">S</div>
+        <div class="star-word">Situation</div>
+        <div class="star-word-cn">情況</div>
+        <div class="star-desc">當時背景係咩？</div>
+      </div>
+      <div class="star-item">
+        <div class="star-letter">T</div>
+        <div class="star-word">Task</div>
+        <div class="star-word-cn">任務</div>
+        <div class="star-desc">你需要做咩？</div>
+      </div>
+      <div class="star-item">
+        <div class="star-letter">A</div>
+        <div class="star-word">Action</div>
+        <div class="star-word-cn">行動</div>
+        <div class="star-desc">你具體做咗咩？</div>
+      </div>
+      <div class="star-item">
+        <div class="star-letter">R</div>
+        <div class="star-word">Result</div>
+        <div class="star-word-cn">結果</div>
+        <div class="star-desc">最終成果係咩？</div>
+      </div>
+    </div>
+    <div class="highlight">
+      Always end with a <strong>positive result 正面結果</strong>. Use numbers.<br>
+      <span style="font-size:10px;">"Zero missed shifts." "Zero safety incidents." "Delivered in full."</span><br>
+      <span style="font-size:10px;color:#5a9a5a;">盡量有數字支持答案</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- ROW 2: Q&A -->
+<div class="section-label">📋 Key Questions &amp; Answers 重點問題與答案</div>
+<div class="grid-2">
+
+  <div class="card teal">
+    <h2>💬 Q&amp;A — Background &amp; Business</h2>
+    <span class="h2-cn" style="display:block;font-size:10px;opacity:0.7;margin-bottom:7px;">背景與業務</span>
+    <table class="qa">
+      <tr>
+        <td>How did you find out about AFP?<span class="q-cn">點知道 AFP 計劃？</span></td>
+        <td>
+          <div class="star-row"><span class="stag s">S</span><span class="star-text">We started careers as HGV drivers under AFP partners in Warrington &amp; Manchester</span></div>
+          <div class="star-cn">我地由司機做起，喺 Warrington 及 Manchester 嘅 AFP 公司工作</div>
+          <div class="star-row"><span class="stag t">T</span><span class="star-text">Understand the industry from the inside before building our own business</span></div>
+          <div class="star-cn">想親身了解行業，先創業</div>
+          <div class="star-row"><span class="stag a">A</span><span class="star-text">Worked under <strong>A&amp;F and DSK</strong> — learned Amazon's systems, pace, standards &amp; culture first-hand</span></div>
+          <div class="star-cn">係 A&amp;F 同 DSK 親身學習 Amazon 運作系統</div>
+          <div class="star-row"><span class="stag r">R</span><span class="star-text">That inside knowledge gave us the blueprint to incorporate Lionrock with <strong>AFP as the primary goal from day one</strong></span></div>
+          <div class="star-cn">親身經驗令我地有信心，成立 Lionrock 第一步就係申請 AFP</div>
+        </td>
+      </tr>
+      <tr>
+        <td>Why start Lionrock? Why AFP?<span class="q-cn">點解成立 Lionrock？</span></td>
+        <td>
+          <div class="star-row"><span class="stag s">S</span><span class="star-text">After years working within AFP operations, we knew the model inside out</span></div>
+          <div class="star-cn">多年 AFP 工作經驗，我地完全了解呢個模式</div>
+          <div class="star-row"><span class="stag t">T</span><span class="star-text">Build a logistics business — not a generic one, but one built specifically for AFP</span></div>
+          <div class="star-cn">目標唔係一般貨運公司，而係專為 AFP 而建</div>
+          <div class="star-row"><span class="stag a">A</span><span class="star-text">AFP was <strong>step one</strong> when we incorporated Lionrock — every decision since has been intentional</span></div>
+          <div class="star-cn">成立公司第一步就係申請 AFP，唔係事後先諗</div>
+          <div class="star-row"><span class="stag r">R</span><span class="star-text">Lionrock Haulage exists <strong>specifically to become an Amazon Freight Partner</strong> — not a fallback plan</span></div>
+          <div class="star-cn">Lionrock 存在嘅唯一目的就係成為 Amazon Freight Partner</div>
+        </td>
+      </tr>
+      <tr>
+        <td>Impressions of Amazon?<span class="q-cn">對 Amazon 印象？</span></td>
+        <td>
+          <div class="star-row"><span class="stag s">S</span><span class="star-text">We experienced Amazon's network first-hand as drivers across multiple AFP sites</span></div>
+          <div class="star-cn">我地親身喺多個 AFP 站點工作過</div>
+          <div class="star-row"><span class="stag t">T</span><span class="star-text">Needed to understand if Amazon was the right long-term partner to build a business around</span></div>
+          <div class="star-cn">要確認 Amazon 係咪值得長期合作的平台</div>
+          <div class="star-row"><span class="stag a">A</span><span class="star-text">Observed and worked within the systems — scanning, manifests, station protocols, delivery standards</span></div>
+          <div class="star-cn">實際操作掃描、運單、站點流程、交收標準</div>
+          <div class="star-row"><span class="stag r">R</span><span class="star-text"><strong>Consistency across all sites</strong> — same unified systems everywhere = faster training, fewer errors, world-leading logistics</span></div>
+          <div class="star-cn">全國統一系統係最大優點：培訓快、錯誤少、世界級物流</div>
+        </td>
+      </tr>
+      <tr>
+        <td>What did you do while waiting?<span class="q-cn">等待期間做咗咩？</span></td>
+        <td>
+          <div class="star-row"><span class="stag s">S</span><span class="star-text">AFP approval takes time — we could not sit idle while waiting</span></div>
+          <div class="star-cn">AFP 審批需要時間，我地唔可以坐等</div>
+          <div class="star-row"><span class="stag t">T</span><span class="star-text">Build operational experience and revenue while staying connected to Amazon's network</span></div>
+          <div class="star-cn">喺等待期間積累運營經驗，保持與 Amazon 網絡聯繫</div>
+          <div class="star-row"><span class="stag a">A</span><span class="star-text">Started <strong>Amazon Relay</strong> immediately + secured Tesco / Heinz / Maritime Liverpool Port / WS Transport + took <strong>Evri Christmas 2024 24/7</strong> peak cover</span></div>
+          <div class="star-cn">即刻做 Relay + 多客戶合約 + 聖誕峰期 24/7 無間斷運作</div>
+          <div class="star-row"><span class="stag r">R</span><span class="star-text">Proven <strong>24/7 operational capability</strong>, multi-client management — <strong>zero failures during peak season</strong></span></div>
+          <div class="star-cn">實證 24/7 運作能力，多客戶管理，峰期零失誤</div>
+        </td>
+      </tr>
+      <tr>
+        <td>Experience running a business?<span class="q-cn">有咩業務經驗？</span></td>
+        <td>
+          <div class="star-row"><span class="stag s">S</span><span class="star-text">Incorporated Lionrock as a two-director owner-operated company with multiple simultaneous clients</span></div>
+          <div class="star-cn">兩位董事共同創立，同時服務多個客戶</div>
+          <div class="star-row"><span class="stag t">T</span><span class="star-text">Manage P&amp;L, driver coordination, compliance and operations at the same time with no middle layer</span></div>
+          <div class="star-cn">同時管理財務、司機、合規、運營 — 冇中間管理層</div>
+          <div class="star-row"><span class="stag a">A</span><span class="star-text">Full P&amp;L management, multi-client scheduling, Evri Christmas 2024 24/7 peak cover — both directors fully hands-on</span></div>
+          <div class="star-cn">全責管理損益、排班、聖誕峰期，兩位董事親力親為</div>
+          <div class="star-row"><span class="stag r">R</span><span class="star-text"><strong>Delivered without failure.</strong> Proven track record as owner-operators — two-person company, total accountability</span></div>
+          <div class="star-cn">零失誤完成所有合約，兩人公司，全責到底</div>
+        </td>
+      </tr>
+      <tr>
+        <td>Why are you ready for AFP?<span class="q-cn">點解你地準備好？</span></td>
+        <td>
+          <div class="star-row"><span class="stag s">S</span><span class="star-text">Every step since incorporation has been building towards AFP readiness</span></div>
+          <div class="star-cn">成立以來每一步都係為 AFP 做準備</div>
+          <div class="star-row"><span class="stag t">T</span><span class="star-text">Demonstrate readiness across compliance, operations, Amazon familiarity and culture</span></div>
+          <div class="star-cn">在合規、運營、熟悉度和文化各方面展示準備就緒</div>
+          <div class="star-row"><span class="stag a">A</span><span class="star-text">Luca achieved <strong>CPC qualification</strong>. Both hold HGV licences. Built experience via Relay, multi-client haulage &amp; Evri peak cover</span></div>
+          <div class="star-cn">Luca 取得 CPC，兩人持 HGV，透過 Relay、多客戶及峰期建立實戰經驗</div>
+          <div class="star-row"><span class="stag r">R</span><span class="star-text">① CPC compliance ② Amazon familiarity ③ <strong>24/7 proven</strong> ④ <strong>2R: Reliable &amp; Responsible</strong></span></div>
+          <div class="star-cn">合規 · 熟悉 Amazon · 24/7 實證 · 可靠負責</div>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="card purple">
+    <h2>💬 Q&amp;A — Operations &amp; Leadership</h2>
+    <span class="h2-cn" style="display:block;font-size:10px;opacity:0.7;margin-bottom:7px;">運營與領導力</span>
+    <table class="qa">
+      <tr>
+        <td>Sudden driver absence?<span class="q-cn">司機突然缺席？</span></td>
+        <td>
+          <div class="star-row"><span class="stag s">S</span><span class="star-text">A driver called in sick at short notice during a busy operational shift</span></div>
+          <div class="star-cn">一位司機臨時告病假，當時正值繁忙班次</div>
+          <div class="star-row"><span class="stag t">T</span><span class="star-text">Ensure the round is covered with zero disruption to Amazon delivery commitments</span></div>
+          <div class="star-cn">確保交收唔受影響，繼續按時完成</div>
+          <div class="star-row"><span class="stag a">A</span><span class="star-text">One of us stepped in personally as driver — <strong>both directors hold valid HGV licences</strong> and are always on standby</span></div>
+          <div class="star-cn">老闆親自頂替出車，兩位董事都持有效 HGV 牌，隨時候命</div>
+          <div class="star-row"><span class="stag r">R</span><span class="star-text"><strong>Zero disruption.</strong> Round completed on time. <em>"We rely on solutions, not excuses."</em></span></div>
+          <div class="star-cn">零中斷，準時完成。我地用方案解決問題，唔係找藉口</div>
+        </td>
+      </tr>
+      <tr>
+        <td>Running late for delivery?<span class="q-cn">交收遲咗點做？</span></td>
+        <td>
+          <div class="star-row"><span class="stag s">S</span><span class="star-text">Vehicle delayed due to unexpected traffic — running behind schedule on the round</span></div>
+          <div class="star-cn">因突發交通問題導致班次落後於計劃</div>
+          <div class="star-row"><span class="stag t">T</span><span class="star-text">Protect customer deliveries and keep Amazon station informed in real time</span></div>
+          <div class="star-cn">保障客戶交收，同時即時向站點匯報</div>
+          <div class="star-row"><span class="stag a">A</span><span class="star-text">Informed station <strong>immediately</strong>. Reprioritised stops. Never compromised safety to make up time. Driver kept calm and focused</span></div>
+          <div class="star-cn">即時通知站點，重排優先次序，唔會為趕時間冒安全風險</div>
+          <div class="star-row"><span class="stag r">R</span><span class="star-text">Deliveries completed or properly escalated. <strong>Documented and reviewed</strong> to prevent recurrence</span></div>
+          <div class="star-cn">交收完成或妥善升級處理，事後記錄檢討，防止再發生</div>
+        </td>
+      </tr>
+      <tr>
+        <td>Multiple tasks at once?<span class="q-cn">同時多工處理？</span></td>
+        <td>
+          <div class="star-row"><span class="stag s">S</span><span class="star-text">Evri Christmas 2024 — peak season, 24/7 operations, multiple drivers, maximum pressure</span></div>
+          <div class="star-cn">聖誕 2024 峰期，24/7 無間斷，多位司機，最高壓力</div>
+          <div class="star-row"><span class="stag t">T</span><span class="star-text">Manage shift scheduling, driver welfare, vehicle compliance, route planning AND financials simultaneously</span></div>
+          <div class="star-cn">同時管理排班、司機、車輛合規、路線規劃及財務</div>
+          <div class="star-row"><span class="stag a">A</span><span class="star-text">Luca led compliance &amp; driver welfare. Eric led P&amp;L &amp; scheduling. Daily briefings. Real-time communication between both directors</span></div>
+          <div class="star-cn">Luca 負責合規及司機，Eric 負責財務及排班，每日簡報，即時溝通</div>
+          <div class="star-row"><span class="stag r">R</span><span class="star-text"><strong>Zero failures</strong> throughout entire Christmas peak. Contract completed in full, on time</span></div>
+          <div class="star-cn">整個聖誕峰期零失誤，合約全部完成準時交收</div>
+        </td>
+      </tr>
+      <tr>
+        <td>Handle stress / pressure?<span class="q-cn">高壓下點處理？</span></td>
+        <td>
+          <div class="star-row"><span class="stag s">S</span><span class="star-text">Evri Christmas 2024 — 24/7 ops, driver shortages, peak volume, no room for error</span></div>
+          <div class="star-cn">聖誕峰期：24/7、司機短缺、高峰量，完全冇出錯空間</div>
+          <div class="star-row"><span class="stag t">T</span><span class="star-text">Maintain service levels under maximum pressure without compromising safety or quality</span></div>
+          <div class="star-cn">在最高壓力下維持服務水平，唔可犧牲安全或質素</div>
+          <div class="star-row"><span class="stag a">A</span><span class="star-text">Stayed calm. Planned shifts in advance. Communicated clearly with all parties. Stepped in personally as drivers when needed</span></div>
+          <div class="star-cn">保持冷靜，提前計劃，清晰溝通，必要時親自出車</div>
+          <div class="star-row"><span class="stag r">R</span><span class="star-text">Delivered without fail. <em>"Pressure is not something we fear — it's something we've <strong>proven</strong> we can handle."</em></span></div>
+          <div class="star-cn">全部完成，零失誤。壓力唔係我地恐懼嘅，係我地已証明能夠應對嘅</div>
+        </td>
+      </tr>
+      <tr>
+        <td>Safety culture?<span class="q-cn">安全文化？</span></td>
+        <td>
+          <div class="star-row"><span class="stag s">S</span><span class="star-text">As AFP partner, our vehicles represent Amazon on public roads every day — safety is non-negotiable</span></div>
+          <div class="star-cn">作為 AFP 夥伴，每部車每天都代表 Amazon，安全唔可妥協</div>
+          <div class="star-row"><span class="stag t">T</span><span class="star-text">Build a genuine safety-first culture — not box-ticking, but a real operating standard</span></div>
+          <div class="star-cn">建立真正安全第一的文化，唔係走流程，係實際標準</div>
+          <div class="star-row"><span class="stag a">A</span><span class="star-text">Daily walkaround checks. Strict driver hours (EU/DVSA). Weekly tachograph review. <strong>Zero tolerance defects</strong> — vehicle grounded if needed. Luca = CPC Licensed TM leads all safety</span></div>
+          <div class="star-cn">每日巡查、嚴格工時、每週核查、零容忍缺陷，Luca CPC 主導安全</div>
+          <div class="star-row"><span class="stag r">R</span><span class="star-text"><strong>Zero safety incidents.</strong> <em>"Safety is our foundation"</em> — not a compliance exercise</span></div>
+          <div class="star-cn">零安全事故。安全係基礎，唔係走合規程序</div>
+        </td>
+      </tr>
+      <tr>
+        <td>Team culture?<span class="q-cn">團隊文化？</span></td>
+        <td>
+          <div class="star-row"><span class="stag s">S</span><span class="star-text">As a two-person owner-operated company, culture comes directly from the top — there is no HR layer</span></div>
+          <div class="star-cn">兩人公司，文化直接由老闆定調，冇中間 HR 層</div>
+          <div class="star-row"><span class="stag t">T</span><span class="star-text">Build a team where every driver takes pride in representing Amazon and operates safely</span></div>
+          <div class="star-cn">令每位司機以代表 Amazon 為榮，安全負責任地工作</div>
+          <div class="star-row"><span class="stag a">A</span><span class="star-text">Implemented <strong>2R philosophy</strong>. Safety concerns raised = no reprimand. Every driver personally inducted by us. <strong>Owners lead by example — we drive too</strong></span></div>
+          <div class="star-cn">推行 2R 文化，提安全問題零懲罰，老闆親自入職培訓，親自出車</div>
+          <div class="star-row"><span class="stag r">R</span><span class="star-text">Drivers <strong>returned after peak season by choice.</strong> Strong retention. Every driver knows they represent Amazon</span></div>
+          <div class="star-cn">司機主動選擇回來繼續做，保留率高，每人都知道自己代表 Amazon</div>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+</div>
+
+<!-- ROW 3: EXTRA STAR STORIES -->
+<div class="section-label">⭐ Additional STAR Stories — Real Evidence 更多實戰故事</div>
+<div class="grid-2">
+
+  <!-- Manual → TMS -->
+  <div class="card blue">
+    <h2>🔄 Problem Solving — Manual → System</h2>
+    <span class="h2-cn" style="display:block;font-size:10px;opacity:0.7;margin-bottom:6px;">流程升級 · Bias for Action · Dive Deep · Ownership · Think Big</span>
+    <div class="star-row"><span class="stag s">S</span><span class="star-text">Onboarded a non-Amazon transport op — relied on manual coordination every day</span></div>
+    <div class="star-cn">接咗非 Amazon 運輸合作，每日靠人手協調，不穩定</div>
+    <div class="star-row"><span class="stag t">T</span><span class="star-text">Ensure the operation was stable, efficient and scalable long-term</span></div>
+    <div class="star-cn">確保運作穩定、高效，具備長遠擴展能力</div>
+    <div class="star-row"><span class="stag a">A</span><span class="star-text">After 1 week: identified high uncertainty — multiple daily calls for job confirmations &amp; ref numbers. Recognised <strong>Amazon TMS = structured, predictable, system-driven.</strong> Decided to shift focus to <strong>Amazon MAN8</strong></span></div>
+    <div class="star-cn">一週後發現每日需多次電話確認，效率極低。認識到 Amazon TMS 更有結構，決定轉向 MAN8</div>
+    <div class="star-row"><span class="stag r">R</span><span class="star-text">Improved operational consistency. Reduced daily uncertainty. Scaled with confidence</span></div>
+    <div class="star-cn">穩定性大升，不確定性下降，更有信心擴展業務</div>
+    <div class="highlight" style="margin-top:5px;font-size:11px;">"We moved from <strong>reactive daily coordination</strong> to a <strong>system-led operation.</strong>"<br><span style="color:#5a9a5a;">由人手反應式，升級至系統主導嘅運作模式</span></div>
+  </div>
+
+  <!-- Driver Hours / Lead by Example -->
+  <div class="card green">
+    <h2>🚗 Ownership — Driver Hours / Lead by Example</h2>
+    <span class="h2-cn" style="display:block;font-size:10px;opacity:0.7;margin-bottom:6px;">以身作則 · Ownership · Earn Trust · Deliver Results · Bias for Action</span>
+    <div class="star-row"><span class="stag s">S</span><span class="star-text">During Amazon Relay, driver approached legal hours limit due to unexpected delays</span></div>
+    <div class="star-cn">Relay 運作中，司機因突發延誤接近法定駕駛時間上限</div>
+    <div class="star-row"><span class="stag t">T</span><span class="star-text">Ensure full compliance with driver hours law while still delivering the load on time</span></div>
+    <div class="star-cn">確保合規同時保證準時交收</div>
+    <div class="star-row"><span class="stag a">A</span><span class="star-text">Confirmed driver could not legally continue. <strong>Stepped in personally</strong> — met driver at safe location, took over vehicle, completed the journey. Adjusted schedule, informed all parties</span></div>
+    <div class="star-cn">確認司機無法合法繼續後，老闆親自接手完成行程，並通知所有相關方</div>
+    <div class="star-row"><span class="stag r">R</span><span class="star-text">Delivery on time. <strong>Zero compliance breach. Zero safety risk.</strong> Driver rested properly. Team trust strengthened</span></div>
+    <div class="star-cn">準時完成，零違規，零安全風險，司機得到休息，團隊信任加強</div>
+    <div class="highlight" style="margin-top:5px;font-size:11px;">"Leadership means <strong>stepping in when it matters most</strong> — especially when safety is at stake."<br><span style="color:#5a9a5a;">真正嘅領導係喺最關鍵時刻親自上場，特別係涉及安全合規嘅時候</span></div>
+  </div>
+
+</div>
+<div class="grid-2" style="padding-top:0;">
+
+  <!-- Trailer Leak -->
+  <div class="card red">
+    <h2>🔧 Safety First — Trailer Air Leak 拖車漏氣</h2>
+    <span class="h2-cn" style="display:block;font-size:10px;opacity:0.7;margin-bottom:6px;">Insist on Highest Standards · Ownership · Deliver Results</span>
+    <div class="star-row"><span class="stag s">S</span><span class="star-text">Trailer discovered with air leak — engine running seemed OK, but risk was present</span></div>
+    <div class="star-cn">拖車漏氣，引擎開著時似乎正常，但存在安全隱患</div>
+    <div class="star-row"><span class="stag t">T</span><span class="star-text">Risk operating it and keep revenue, OR cancel all work and repair immediately</span></div>
+    <div class="star-cn">決定：冒險繼續賺錢，還是即時停車維修</div>
+    <div class="star-row"><span class="stag a">A</span><span class="star-text"><strong>Immediately cancelled</strong> all remaining work that day + next few days. Arranged emergency repair. Switched to <strong>Traction Only</strong> work during downtime to minimise revenue loss</span></div>
+    <div class="star-cn">即時取消當日及接下來數日工作，安排緊急維修，停工期間轉做 Traction Only 減少損失</div>
+    <div class="star-row"><span class="stag r">R</span><span class="star-text">Repair took 1+ week (parts delay). Lost <strong>~£500 revenue.</strong> BUT: found <strong>punctured air bag</strong> — if undetected, rapid deterioration → accident → potentially £10,000s in liability + injury</span></div>
+    <div class="star-cn">維修逾一週，損失約 £500，但發現氣袋穿孔，及早處理避免事故，保住遠大於 £500 嘅潛在損失</div>
+    <div class="highlight" style="margin-top:5px;font-size:11px;">"That £500 loss was a <strong>necessary investment</strong> — safety budget always takes priority over profit at Lionrock."<br><span style="color:#5a9a5a;">£500 係必要投資——Lionrock 安全預算永遠優先於利潤</span></div>
+  </div>
+
+  <!-- Evri Shift Handover -->
+  <div class="card teal">
+    <h2>⚡ Invent &amp; Simplify — Evri Shift Delay 換班危機</h2>
+    <span class="h2-cn" style="display:block;font-size:10px;opacity:0.7;margin-bottom:6px;">Bias for Action · Invent &amp; Simplify · Deliver Results</span>
+    <div class="star-row"><span class="stag s">S</span><span class="star-text">Evri 24hr shifts designed with zero buffer. Warehouse problem → AM shift severely delayed → risk of chain reaction all week</span></div>
+    <div class="star-cn">24 小時班次零緩衝，倉庫問題令 AM 班嚴重遲到，可能引發整週連鎖效應</div>
+    <div class="star-row"><span class="stag t">T</span><span class="star-text">Ensure PM shift started on time to break the chain — without extra cost or resources</span></div>
+    <div class="star-cn">確保 PM 班準時開始，打破連鎖效應，不能增加額外成本</div>
+    <div class="star-row"><span class="stag a">A</span><span class="star-text"><strong>Changed handover location</strong> from our yard to a service station near Evri. AM driver returned to yard by private car. PM driver met truck directly — cutting travel time completely</span></div>
+    <div class="star-cn">將交更地點由車廠改至 Evri 附近服務站，AM 司機私家車回廠，PM 司機就近接車</div>
+    <div class="star-row"><span class="stag r">R</span><span class="star-text">On-time handover. Changeover time: <strong>1.5 hours → 5 minutes</strong>. Chain reaction broken. No additional cost</span></div>
+    <div class="star-cn">準時交接。換班時間由 1.5 小時縮至 5 分鐘。連鎖效應化解，零額外成本</div>
+    <div class="highlight" style="margin-top:5px;font-size:11px;">"When the system couldn't flex, <strong>we redesigned the process on the spot</strong> — saving 85 minutes of downtime."<br><span style="color:#5a9a5a;">系統無法靈活時，我哋即場重新設計流程，節省 85 分鐘停機時間</span></div>
+  </div>
+
+</div>
+<div class="grid-2" style="padding-top:0;">
+
+  <!-- Route Data Analysis -->
+  <div class="card amber">
+    <h2>📊 Dive Deep — Route Data Analysis 路線數據分析</h2>
+    <span class="h2-cn" style="display:block;font-size:10px;opacity:0.7;margin-bottom:6px;">Dive Deep · Are Right A Lot · Frugality · Invent &amp; Simplify</span>
+    <div class="star-row"><span class="stag s">S</span><span class="star-text">Amazon Relay app sometimes routes drivers via A-roads instead of motorway (e.g. MAN8→MAN3 via A580 vs M62)</span></div>
+    <div class="star-cn">Amazon Relay 有時引導走 A580 捷徑而非 M62 高速公路</div>
+    <div class="star-row"><span class="stag t">T</span><span class="star-text">Verify: is the "shortcut" actually more fuel-efficient and safer for HGVs?</span></div>
+    <div class="star-cn">驗證：捷徑對 HGV 是否真的更省油更安全？</div>
+    <div class="star-row"><span class="stag a">A</span><span class="star-text">Calculated: A580 only <strong>9 miles shorter</strong> but has <strong>10+ traffic lights</strong>. Each full stop wastes momentum ≈ 1 mile of free coasting for an HGV. Motorway = continuous momentum, safer, less brake wear</span></div>
+    <div class="star-cn">計算：A580 雖短 9 英里，但 10+ 個紅燈，每次停車浪費約 1 英里動能。高速路反而更省油安全，煞車保養更少</div>
+    <div class="star-row"><span class="stag r">R</span><span class="star-text">Adopted motorway routing. <strong>No extra fuel cost + higher safety + lower brake maintenance.</strong> Data beat assumption</span></div>
+    <div class="star-cn">改用高速路線，無額外油耗，安全性更高，煞車保養更少。數據勝過直覺</div>
+    <div class="highlight" style="margin-top:5px;font-size:11px;">"We don't blindly follow the app. <strong>We verify with data and optimise based on evidence.</strong>"<br><span style="color:#5a9a5a;">我哋唔盲目跟隨 App，用數據驗證並根據實據優化</span></div>
+  </div>
+
+  <!-- DVS / London Contract -->
+  <div class="card purple">
+    <h2>📚 Learn &amp; Own — DVS System / London Contract DVS 教訓</h2>
+    <span class="h2-cn" style="display:block;font-size:10px;opacity:0.7;margin-bottom:6px;">Have Backbone · Ownership · Learn &amp; Be Curious · Earn Trust</span>
+    <div class="star-row"><span class="stag s">S</span><span class="star-text">Early days — didn't know Amazon tramp contracts might enter London (requiring DVS — Direct Vision Standard)</span></div>
+    <div class="star-cn">初期不知道 Amazon tramp contract 可能需進入倫敦（需要 DVS 直接視野標準系統）</div>
+    <div class="star-row"><span class="stag t">T</span><span class="star-text">Accepted a contract without DVS installed — couldn't fit it before journey. Needed an immediate decision</span></div>
+    <div class="star-cn">已接合約但未裝 DVS，來不及行程前安裝，需即時決定</div>
+    <div class="star-row"><span class="stag a">A</span><span class="star-text"><strong>Immediately rejected the contract</strong> so Amazon could reassign without delay. Prioritised Amazon's operation over our own score. Arranged DVS installation before accepting any similar contracts</span></div>
+    <div class="star-cn">立即拒絕合約讓 Amazon 迅速重新安排，優先保護 Amazon 運作。之後確保裝好 DVS 才再接類似合約</div>
+    <div class="star-row"><span class="stag r">R</span><span class="star-text">Rejection caused score penalty. Recovered by <strong>running more short-distance relay trips</strong> until score returned to Amazon's standard. <strong>Never repeated the mistake</strong></span></div>
+    <div class="star-cn">拒約令評分下跌，透過多接短途 relay 回復至標準。此後絕無重蹈覆轍</div>
+    <div class="highlight" style="margin-top:5px;font-size:11px;">"The right call was to protect Amazon's operation — <strong>even at cost to our own score.</strong> That is what Earn Trust means."<br><span style="color:#5a9a5a;">正確決定係保護 Amazon 運作，即使代價係自己評分受影響——這就係 Earn Trust</span></div>
+  </div>
+
+</div>
+
+<!-- ROW 4: LEADERSHIP PRINCIPLES -->
+<div class="section-label">🏆 Amazon Leadership Principles — Your Evidence 領導力原則 — 你地既證據</div>
+<div class="full">
+  <div class="card amber">
+    <h2>🏆 16 Leadership Principles — What to Say 點答</h2>
+    <div class="lp-grid">
+      <div class="lp-item">
+        <div class="lp-num">1</div>
+        <div class="lp-text">
+          <strong>Customer Obsession 顧客至上</strong>
+          <span>Evri Christmas — personally drove out to cover delayed stops. Every parcel delivered. 親自出車確保每件包裹送到</span>
+        </div>
+      </div>
+      <div class="lp-item">
+        <div class="lp-num">2</div>
+        <div class="lp-text">
+          <strong>Ownership 主人翁精神</strong>
+          <span>Driver sick → we step in. Vehicle down → we fix it. No excuses. Total accountability. 司機病咗老闆頂，冇藉口全責</span>
+        </div>
+      </div>
+      <div class="lp-item">
+        <div class="lp-num">3</div>
+        <div class="lp-text">
+          <strong>Invent &amp; Simplify 創新簡化</strong>
+          <span>Built load cost calculator → eliminated unprofitable loads. Margin improved 15–20%. 自建成本計算工具，利潤提升 15-20%</span>
+        </div>
+      </div>
+      <div class="lp-item">
+        <div class="lp-num">4</div>
+        <div class="lp-text">
+          <strong>Are Right, A Lot 判斷正確</strong>
+          <span>Transitioned to contracted work despite pushback — Evri contract followed. 堅持轉做合約，事後証明正確</span>
+        </div>
+      </div>
+      <div class="lp-item">
+        <div class="lp-num">5</div>
+        <div class="lp-text">
+          <strong>Learn &amp; Be Curious 學習求知</strong>
+          <span>Started as drivers. Self-taught P&L, tachograph analysis, fleet compliance. Still learning. 由司機自學財務合規</span>
+        </div>
+      </div>
+      <div class="lp-item">
+        <div class="lp-num">6</div>
+        <div class="lp-text">
+          <strong>Hire &amp; Develop the Best 招募培育</strong>
+          <span>Every driver personally interviewed + inducted. Coached driver on hours — now our best. 親自面試帶領每位司機</span>
+        </div>
+      </div>
+      <div class="lp-item">
+        <div class="lp-num">7</div>
+        <div class="lp-text">
+          <strong>Insist on High Standards 高標準</strong>
+          <span>Grounded vehicle mid-shift. Refused client request to extend driver hours illegally. 車有問題即停，拒絕違規</span>
+        </div>
+      </div>
+      <div class="lp-item">
+        <div class="lp-num">8</div>
+        <div class="lp-text">
+          <strong>Think Big 宏觀思維</strong>
+          <span>AFP was goal from day one. Every step — Relay, clients, Evri — was intentional. AFP 係由第一天開始既目標</span>
+        </div>
+      </div>
+      <div class="lp-item">
+        <div class="lp-num">9</div>
+        <div class="lp-text">
+          <strong>Bias for Action 主動行動</strong>
+          <span>Immediately started Relay while waiting for AFP. Committed to Evri before full team confirmed. 等批核期間即刻行動</span>
+        </div>
+      </div>
+      <div class="lp-item">
+        <div class="lp-num">10</div>
+        <div class="lp-text">
+          <strong>Frugality 節儉</strong>
+          <span>Built profitable multi-client operation with minimal capital. Weekly P&L. Eliminated loss-making loads. 小本創業，嚴控損益</span>
+        </div>
+      </div>
+      <div class="lp-item">
+        <div class="lp-num">11</div>
+        <div class="lp-text">
+          <strong>Earn Trust 建立信任</strong>
+          <span>Accepted loss-making load → told partner immediately, no excuses. Transparency builds trust. 透明誠實建立信任</span>
+        </div>
+      </div>
+      <div class="lp-item">
+        <div class="lp-num">12</div>
+        <div class="lp-text">
+          <strong>Dive Deep 深入細節</strong>
+          <span>Weekly tachograph review per driver. Per-load tracking. Caught hours issue before breach. 每週逐個司機核查工時</span>
+        </div>
+      </div>
+      <div class="lp-item">
+        <div class="lp-num">13</div>
+        <div class="lp-text">
+          <strong>Have Backbone 有骨氣</strong>
+          <span>Client pressured driver hours extension → firmly refused, offered alternatives. Client stayed. 拒絕客戶非法要求，提供替代方案</span>
+        </div>
+      </div>
+      <div class="lp-item">
+        <div class="lp-num">14</div>
+        <div class="lp-text">
+          <strong>Deliver Results 兌現成果</strong>
+          <span>Evri Christmas 2024. 24/7. Zero missed shifts. Zero failed deliveries. Completed in full. 零缺席，零失敗，全完成</span>
+        </div>
+      </div>
+      <div class="lp-item">
+        <div class="lp-num">15</div>
+        <div class="lp-text">
+          <strong>Best Employer 最佳僱主</strong>
+          <span>Know every driver personally. Safety = no reprimand. Drivers returned after peak by choice. 司機主動回來再做</span>
+        </div>
+      </div>
+      <div class="lp-item">
+        <div class="lp-num">16</div>
+        <div class="lp-text">
+          <strong>Broad Responsibility 廣泛責任</strong>
+          <span>Amazon-branded trucks = we represent Amazon on every road, every day. We take that personally. 每部車都代表 Amazon</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- QUESTIONS TO ASK -->
+<div class="section-label">❓ My Questions to Ask 我想問嘅問題</div>
+<div class="full">
+  <div class="card" style="border-left: 3px solid #ff9900; background:#1c2030;">
+    <h2 style="color:#ff9900; margin-bottom:8px;">❓ Questions for Amazon — Ask at End of Interview 面試尾段問</h2>
+    <table class="qa" style="margin-top:4px;">
+      <tr>
+        <td style="width:30%; color:#ff9900; font-weight:600; font-size:12px; vertical-align:top; padding:7px 6px;">
+          💰 Financial Requirement<br><span style="color:#8892a4; font-size:10px; font-weight:400;">資金要求</span>
+        </td>
+        <td style="font-size:12px; color:#c8cdd8; padding:7px 6px;">
+          My understanding is the capital requirement is to <strong>maintain O-licence financial standing</strong> — not the total cost of running the whole business. Is that correct?<br>
+          <span style="color:#8892a4; font-size:10.5px;">我理解資金要求係用嚟維持 O-licence 財務要求，而唔係整盤生意嘅總成本——係咁理解嗎？</span><br><br>
+          If so, could you confirm the figure for <strong>1 vehicle</strong>? I can then project the requirement for 10 trucks myself.<br>
+          <span style="color:#8892a4; font-size:10.5px;">如果係，可否確認 1 架車嘅金額？我可以自行推算 10 架車嘅要求。</span>
+        </td>
+      </tr>
+      <tr>
+        <td style="width:30%; color:#ff9900; font-weight:600; font-size:12px; vertical-align:top; padding:7px 6px;">
+          🏭 Yard / Parking<br><span style="color:#8892a4; font-size:10px; font-weight:400;">車場安排</span>
+        </td>
+        <td style="font-size:12px; color:#c8cdd8; padding:7px 6px;">
+          Does Amazon provide a <strong>yard or parking facility</strong> for the AFP fleet, or are we expected to source our own yard for 10 trucks?<br>
+          <span style="color:#8892a4; font-size:10.5px;">Amazon 係咪有提供車場給 AFP 車隊？還是我哋需要自己搵 10 架車嘅停放地點？</span>
+        </td>
+      </tr>
+      <tr>
+        <td style="width:30%; color:#ff9900; font-weight:600; font-size:12px; vertical-align:top; padding:7px 6px;">
+          🚛 Own Trucks<br><span style="color:#8892a4; font-size:10px; font-weight:400;">自備車輛</span>
+        </td>
+        <td style="font-size:12px; color:#c8cdd8; padding:7px 6px;">
+          We already have our own HGV trucks. Can we use <strong>our own vehicles</strong> to operate the AFP contract, or are trucks supplied / required to be sourced through Amazon's programme?<br>
+          <span style="color:#8892a4; font-size:10.5px;">我哋已有自己嘅 HGV 車輛。可以用自己嘅車去做 AFP 合約嗎？還是車輛需要透過 Amazon 計劃提供或指定採購？</span>
+        </td>
+      </tr>
+      <tr>
+        <td style="width:30%; color:#ff9900; font-weight:600; font-size:12px; vertical-align:top; padding:7px 6px;">
+          📋 O-Licence — New or Vary?<br><span style="color:#8892a4; font-size:10px; font-weight:400;">O-Licence 新申請還是加 slot？</span>
+        </td>
+        <td style="font-size:12px; color:#c8cdd8; padding:7px 6px;">
+          We already hold an O-licence. For AFP, do we need to apply for a <strong>brand new O-licence</strong>, or can we simply <strong>vary our existing licence</strong> to add more vehicle slots?<br>
+          <span style="color:#8892a4; font-size:10.5px;">我哋已有 O-licence。做 AFP 係需要重新申請一個新牌，定係可以喺現有牌上面加 vehicle slot？</span><br><br>
+          If we can vary — do we need to add <strong>all 10 slots upfront</strong>, or is it acceptable to <strong>start with 2 vehicles</strong> and gradually increase as the operation grows?<br>
+          <span style="color:#8892a4; font-size:10.5px;">如果可以 vary——係需要一次過加足 10 個 slot，定係可以先加 2 架，之後慢慢再申請增加？</span><br><br>
+          <span style="color:#5a9a5a; font-size:10.5px;">（We want to scale responsibly — start small, prove performance, then grow. Just want to understand the process.）<br>我哋希望穩步擴展——先小規模証明表現，再逐步增加。只係想了解流程。</span>
+        </td>
+      </tr>
+      <tr style="border-bottom:none;">
+        <td style="width:30%; color:#ff9900; font-weight:600; font-size:12px; vertical-align:top; padding:7px 6px;">
+          📍 Base Location<br><span style="color:#8892a4; font-size:10px; font-weight:400;">基地位置</span>
+        </td>
+        <td style="font-size:12px; color:#c8cdd8; padding:7px 6px;">
+          Our current yard is located near <strong>MAN8</strong>. Would it be possible to base our AFP operation out of <strong>Manchester West</strong> rather than Warrington?<br>
+          <span style="color:#8892a4; font-size:10.5px;">我哋車場喺 MAN8 附近。AFP 運作係咪可以以 Manchester West 為基地，而唔係 Warrington？</span><br><br>
+          <span style="color:#5a9a5a; font-size:10.5px;">（If not possible, we are flexible and Warrington is also fine — just want to understand the options.）<br>唔得嘅話完全冇問題，Warrington 都可以——只係想了解有咩選擇。</span>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<!-- CLOSING -->
+<div class="full">
+  <div class="closing">
+    <p>
+      <strong>"Everything we have done since incorporating Lionrock Haulage has been building towards this moment.</strong><br>
+      We didn't build a haulage company and then consider AFP —<br>
+      we built Lionrock Haulage specifically to become an Amazon Freight Partner.<br>
+      <strong>We are ready."</strong>
+    </p>
+    <div class="cn">「自從成立 Lionrock Haulage 以來，我地每一步都係為咗今日。我地唔係做咗貨運公司先諗 AFP — 我地建立 Lionrock 就係為咗成為 Amazon Freight Partner。我地已經準備好。」</div>
+  </div>
+  <div style="text-align:center; color:#2a3048; font-size:10px; padding: 8px;">
+    Lionrock Haulage Ltd · 2R: Reliable &amp; Responsible 可靠 · 負責 · Good luck 加油 💪
+  </div>
+</div>
+
+</body>
+</html>
