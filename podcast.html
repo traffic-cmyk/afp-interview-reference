@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>AFP Interview Podcast 🎙️ — Lionrock Haulage</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: #0a0e1a;
+  color: #e0e4f0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.top-bar {
+  width: 100%;
+  background: #111827;
+  border-bottom: 2px solid #ff9900;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.top-bar .logo { font-size: 20px; }
+.top-bar h1 { font-size: 14px; font-weight: 700; color: #ff9900; line-height: 1.2; }
+.top-bar .sub { font-size: 11px; color: #6a7a8a; }
+
+.player-wrap {
+  width: 100%;
+  max-width: 500px;
+  padding: 14px 14px 0;
+}
+
+/* NOW PLAYING */
+.now-playing {
+  background: linear-gradient(135deg, #1a2240, #0f1830);
+  border: 1px solid #2a3a6a;
+  border-radius: 14px;
+  padding: 16px;
+  margin-bottom: 12px;
+  text-align: center;
+}
+.ep-badge {
+  display: inline-block;
+  background: #ff9900;
+  color: #000;
+  font-size: 10px;
+  font-weight: 900;
+  padding: 2px 8px;
+  border-radius: 10px;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+.ep-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.3;
+  margin-bottom: 4px;
+}
+.ep-cn {
+  font-size: 12px;
+  color: #8892a4;
+  margin-bottom: 12px;
+}
+.ep-what {
+  background: #1e2a40;
+  border-left: 3px solid #448aff;
+  border-radius: 6px;
+  padding: 7px 10px;
+  font-size: 11.5px;
+  color: #90a0c0;
+  text-align: left;
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+.ep-what strong { color: #64b5f6; }
+
+/* SCRIPT DISPLAY */
+.script-box {
+  background: #111827;
+  border-radius: 10px;
+  padding: 10px 12px;
+  min-height: 80px;
+  margin-bottom: 12px;
+  text-align: left;
+  position: relative;
+  overflow: hidden;
+}
+.script-role {
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.script-role.host { color: #ff9900; }
+.script-role.interviewer { color: #64b5f6; }
+.script-role.answer { color: #69f0ae; }
+.script-role.tip { color: #ce93d8; }
+.script-text {
+  font-size: 13px;
+  color: #d0d8e8;
+  line-height: 1.6;
+}
+.script-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.host .script-dot { background: #ff9900; }
+.interviewer .script-dot { background: #64b5f6; }
+.answer .script-dot { background: #69f0ae; }
+.tip .script-dot { background: #ce93d8; }
+
+/* PROGRESS */
+.progress-wrap {
+  margin-bottom: 10px;
+}
+.progress-bar-bg {
+  background: #1e2840;
+  border-radius: 4px;
+  height: 5px;
+  width: 100%;
+  overflow: hidden;
+  margin-bottom: 5px;
+}
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #ff9900, #ffcc00);
+  border-radius: 4px;
+  transition: width 0.4s;
+  width: 0%;
+}
+.progress-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  color: #4a5a7a;
+}
+
+/* CONTROLS */
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+.btn {
+  border: none;
+  cursor: pointer;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  transition: transform 0.1s, opacity 0.2s;
+  flex-shrink: 0;
+}
+.btn:active { transform: scale(0.92); }
+.btn-prev, .btn-next {
+  width: 48px; height: 48px;
+  background: #1e2840;
+  color: #8892a4;
+  font-size: 20px;
+}
+.btn-play {
+  width: 72px; height: 72px;
+  background: #ff9900;
+  color: #000;
+  font-size: 28px;
+  border-radius: 50%;
+  box-shadow: 0 4px 20px rgba(255,153,0,0.4);
+}
+.btn-play:hover { opacity: 0.9; }
+.btn-replay {
+  width: 44px; height: 44px;
+  background: #1e2840;
+  color: #8892a4;
+  font-size: 18px;
+}
+
+/* SPEED */
+.speed-row {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+.speed-btn {
+  border: 1px solid #2a3a5a;
+  background: #1a2238;
+  color: #8892a4;
+  font-size: 12px;
+  padding: 5px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.speed-btn.active {
+  background: #ff9900;
+  border-color: #ff9900;
+  color: #000;
+  font-weight: 700;
+}
+
+/* EPISODE LIST */
+.ep-list-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: #3a4a6a;
+  text-transform: uppercase;
+  padding: 0 14px 6px;
+  width: 100%;
+  max-width: 500px;
+}
+.ep-list {
+  width: 100%;
+  max-width: 500px;
+  padding: 0 14px 30px;
+}
+.ep-item {
+  background: #111827;
+  border: 1px solid #1e2840;
+  border-radius: 10px;
+  padding: 10px 12px;
+  margin-bottom: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: border-color 0.15s;
+}
+.ep-item:active { opacity: 0.8; }
+.ep-item.active {
+  border-color: #ff9900;
+  background: #1a1e2a;
+}
+.ep-item .ep-num {
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  background: #1e2840;
+  color: #4a5a7a;
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.ep-item.active .ep-num {
+  background: #ff9900;
+  color: #000;
+}
+.ep-item .ep-info { flex: 1; }
+.ep-item .ep-name { font-size: 12.5px; color: #c8d0e0; font-weight: 600; line-height: 1.3; }
+.ep-item .ep-meta { font-size: 10.5px; color: #4a5a7a; margin-top: 2px; }
+.ep-item .ep-dur { font-size: 11px; color: #3a4a6a; flex-shrink: 0; }
+.ep-item.done .ep-num { background: #1a3a1a; color: #69f0ae; }
+
+/* LEGEND */
+.legend {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 0 14px 12px;
+  width: 100%;
+  max-width: 500px;
+}
+.leg-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10.5px;
+  color: #6a7a9a;
+}
+.leg-dot { width: 8px; height: 8px; border-radius: 50%; }
+
+/* SLEEPING SCREEN (for driving) */
+.drive-mode-btn {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  background: #1e2840;
+  border: 1px solid #ff9900;
+  color: #ff9900;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 8px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  z-index: 100;
+}
+.drive-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: #000;
+  z-index: 200;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+.drive-overlay.visible { display: flex; }
+.drive-ep-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #ff9900;
+  text-align: center;
+  padding: 0 20px;
+  line-height: 1.4;
+}
+.drive-script {
+  font-size: 15px;
+  color: #c8d0e0;
+  text-align: center;
+  padding: 0 24px;
+  line-height: 1.7;
+  max-width: 400px;
+}
+.drive-btn-play {
+  width: 100px; height: 100px;
+  border-radius: 50%;
+  background: #ff9900;
+  color: #000;
+  font-size: 40px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 40px rgba(255,153,0,0.5);
+}
+.drive-exit {
+  color: #3a4a6a;
+  font-size: 12px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+}
+.drive-progress {
+  font-size: 13px;
+  color: #4a5a7a;
+}
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="logo">🎙️</div>
+  <div>
+    <div class="h1" style="font-size:14px;font-weight:700;color:#ff9900">AFP Interview Podcast</div>
+    <div class="sub">Lionrock Haulage Ltd — Amazon Freight Partner 備試音頻</div>
+  </div>
+</div>
+
+<div class="player-wrap">
+  <!-- NOW PLAYING CARD -->
+  <div class="now-playing">
+    <div class="ep-badge" id="ep-badge">EP 1</div>
+    <div class="ep-title" id="ep-title">Loading...</div>
+    <div class="ep-cn" id="ep-cn"></div>
+    <div class="ep-what" id="ep-what"></div>
+
+    <!-- Script display -->
+    <div class="script-box">
+      <div class="script-role host" id="script-role">
+        <span class="script-dot"></span>
+        <span id="role-label">HOST</span>
+      </div>
+      <div class="script-text" id="script-text">Press play to start your interview prep podcast...</div>
+    </div>
+
+    <!-- Progress -->
+    <div class="progress-wrap">
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill" id="progress-fill"></div>
+      </div>
+      <div class="progress-labels">
+        <span id="prog-cur">0 / 0</span>
+        <span id="prog-ep">Episode 1 of 12</span>
+      </div>
+    </div>
+
+    <!-- Controls -->
+    <div class="controls">
+      <button class="btn btn-prev" id="btn-prev" onclick="prevEpisode()" title="Previous episode">⏮</button>
+      <button class="btn btn-replay" onclick="replaySegment()" title="Replay this segment">↩</button>
+      <button class="btn btn-play" id="btn-play" onclick="togglePlay()">▶</button>
+      <button class="btn btn-replay" onclick="skipSegment()" title="Skip segment">⏭</button>
+      <button class="btn btn-next" id="btn-next" onclick="nextEpisode()" title="Next episode">⏭️</button>
+    </div>
+
+    <!-- Speed control -->
+    <div class="speed-row">
+      <span style="font-size:11px;color:#4a5a7a;line-height:2">Speed:</span>
+      <button class="speed-btn" onclick="setSpeed(0.8)">0.8×</button>
+      <button class="speed-btn active" onclick="setSpeed(1.0)">1×</button>
+      <button class="speed-btn" onclick="setSpeed(1.1)">1.1×</button>
+      <button class="speed-btn" onclick="setSpeed(1.25)">1.25×</button>
+      <button class="speed-btn" onclick="setSpeed(1.5)">1.5×</button>
+    </div>
+  </div>
+
+  <!-- Legend -->
+  <div class="legend">
+    <div class="leg-item"><div class="leg-dot" style="background:#ff9900"></div>Host / Narrator</div>
+    <div class="leg-item"><div class="leg-dot" style="background:#64b5f6"></div>Interviewer (Amazon)</div>
+    <div class="leg-item"><div class="leg-dot" style="background:#69f0ae"></div>Your Answer</div>
+    <div class="leg-item"><div class="leg-dot" style="background:#ce93d8"></div>Key Tip 💡</div>
+  </div>
+</div>
+
+<!-- EPISODE LIST -->
+<div class="ep-list-label">All Episodes — 所有集數</div>
+<div class="ep-list" id="ep-list"></div>
+
+<!-- DRIVE MODE BUTTON -->
+<button class="drive-mode-btn" onclick="enterDriveMode()">🚗 Drive Mode</button>
+
+<!-- DRIVE MODE OVERLAY -->
+<div class="drive-overlay" id="drive-overlay">
+  <div style="font-size:13px;color:#3a4a6a;letter-spacing:1px">NOW PLAYING</div>
+  <div class="drive-ep-title" id="drive-ep-title">—</div>
+  <div class="drive-script" id="drive-script">—</div>
+  <button class="drive-btn-play" id="drive-btn-play" onclick="togglePlay()">▶</button>
+  <div class="drive-progress" id="drive-progress">—</div>
+  <button class="drive-exit" onclick="exitDriveMode()">✕ Exit Drive Mode</button>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════
+// PODCAST SCRIPT
+// ═══════════════════════════════════════════════════════
+const PODCAST = [
+
+  // ── EP 1 ──────────────────────────────────────────
+  {
+    id: 1,
+    title: "Introduction & Tell Me About Yourself",
+    cn: "介紹你自己",
+    what: "Amazon looks for: <strong>Positivity, resilience, people-oriented mindset.</strong> Show you understand the operation from the ground up.",
+    script: [
+      { role:"host",        text:"Welcome to the Lionrock Haulage AFP Interview Podcast. Use this audio to prepare for your Amazon Freight Partner interview. Listen on repeat while driving — the more times you hear it, the more natural your answers will become." },
+      { role:"host",        text:"Episode 1 — Tell me about yourself. This is always the opening question. Here is how to answer it." },
+      { role:"interviewer", text:"Tell me about yourself." },
+      { role:"answer",      text:"My name is Eric. I'm one of the two directors of Lionrock Haulage Limited." },
+      { role:"answer",      text:"My co-director Luca is our Licensed Transport Manager — fully CPC qualified — responsible for compliance, vehicle maintenance, and road safety." },
+      { role:"answer",      text:"I manage the financial operations and driver coordination." },
+      { role:"answer",      text:"Together, we have a combined background in the logistics industry. We both started as drivers ourselves, working under AFP operations in Warrington and Manchester — specifically companies like A and F, and DSK." },
+      { role:"answer",      text:"That ground-level experience is what drove us to build our own business and apply for the AFP programme." },
+      { role:"tip",         text:"Key tip: Always mention your CPC qualification and that you started as drivers. Amazon loves people who know the operation from the bottom up. This builds instant credibility." },
+    ]
+  },
+
+  // ── EP 2 ──────────────────────────────────────────
+  {
+    id: 2,
+    title: "Why AFP? Why Lionrock? Why Amazon?",
+    cn: "點解選擇 AFP / Amazon？",
+    what: "Amazon looks for: <strong>Entrepreneurial spirit, genuine commitment, long-term mindset — not just looking for a contract.</strong>",
+    script: [
+      { role:"host",        text:"Episode 2 — Why did you start Lionrock Haulage, and why AFP specifically? Also — why Amazon?" },
+      { role:"interviewer", text:"Why did you start your company? And why did you choose the AFP programme specifically?" },
+      { role:"answer",      text:"After working within the AFP network as drivers, we were convinced this was the industry we wanted to build a business in." },
+      { role:"answer",      text:"We knew the model, we trusted the platform, and we believed we had the operational knowledge to run it well." },
+      { role:"answer",      text:"So applying for AFP was the very first step we took when we incorporated Lionrock Haulage. We didn't set up a generic haulage company and then consider AFP — AFP was always the goal." },
+      { role:"interviewer", text:"Why Amazon specifically?" },
+      { role:"answer",      text:"Amazon is the UK's largest e-commerce platform and operates the world's most advanced logistics network." },
+      { role:"answer",      text:"Having worked within the AFP ecosystem as drivers, we've seen first-hand how the system works and why it works." },
+      { role:"answer",      text:"We don't want to just work with Amazon — we want to grow with Amazon. That's a very different mindset." },
+      { role:"tip",         text:"Key tip: The phrase 'grow with Amazon' is powerful. It signals long-term commitment, not just a transactional relationship. Amazon invests in partners who are in it for the long run." },
+    ]
+  },
+
+  // ── EP 3 ──────────────────────────────────────────
+  {
+    id: 3,
+    title: "Business Experience & Preparation",
+    cn: "經營經驗同準備工作",
+    what: "Amazon looks for: <strong>Ownership mindset, bias for action — not sitting idle while waiting for approval.</strong>",
+    script: [
+      { role:"host",        text:"Episode 3 — Business experience and what you have been doing to prepare. This tests your Bias for Action — one of Amazon's core leadership principles." },
+      { role:"interviewer", text:"What experience do you have of running a business?" },
+      { role:"answer",      text:"We incorporated Lionrock Haulage with AFP as our primary objective from day one." },
+      { role:"answer",      text:"While awaiting approval, we actively ran operations through Amazon Relay, and also provided haulage services for Tesco, Heinz, Maritime Liverpool Port, and WS Transport." },
+      { role:"answer",      text:"During Christmas 2024, we provided 24/7 non-stop shift cover for Evri Warrington — managing drivers, scheduling, compliance and financials simultaneously under peak pressure." },
+      { role:"interviewer", text:"What have you been doing to prepare while awaiting AFP approval?" },
+      { role:"answer",      text:"We immediately started using Amazon Relay — taking loads from the load board and fulfilling relay contracts to stay connected to the network." },
+      { role:"answer",      text:"Alongside that, we secured haulage contracts with Tesco, Heinz, Maritime Liverpool Port, and WS Transport." },
+      { role:"answer",      text:"Most notably, we provided 24/7 non-stop shift cover for Evri during the Christmas 2024 peak season — proving we can handle high-volume, round-the-clock operations." },
+      { role:"tip",         text:"Key tip: The Evri Christmas 2024 story is your golden answer. Mention it for almost every operational question. It demonstrates: peak operations, 24/7 capability, driver management, and results under pressure." },
+    ]
+  },
+
+  // ── EP 4 ──────────────────────────────────────────
+  {
+    id: 4,
+    title: "Driver Absence & Emergency Scenarios",
+    cn: "突發司機缺席點處理？",
+    what: "Amazon looks for: <strong>Solutions over excuses. Zero disruption to deliveries. Hands-on ownership.</strong>",
+    script: [
+      { role:"host",        text:"Episode 4 — How do you handle a sudden driver absence or emergency? This is a critical operational question. Amazon wants to know you have a backup plan." },
+      { role:"interviewer", text:"How would you handle a sudden driver absence or emergency?" },
+      { role:"answer",      text:"Both Luca and I hold valid HGV and LGV licences and are always on standby as emergency backup drivers." },
+      { role:"answer",      text:"If a driver calls in sick at short notice, one of us will step in personally to ensure the round is covered without any disruption to Amazon's delivery commitments." },
+      { role:"answer",      text:"We don't rely on excuses — we rely on solutions. That's part of what Reliable means to us." },
+      { role:"interviewer", text:"What if you are running late for a delivery?" },
+      { role:"answer",      text:"First — immediately inform the station and operations team." },
+      { role:"answer",      text:"Second — do NOT compromise safety to make up time. Safety always comes first." },
+      { role:"answer",      text:"Third — communicate proactively with all affected parties throughout." },
+      { role:"answer",      text:"And fourth — document the issue for review, so we can prevent it happening again." },
+      { role:"tip",         text:"Key tip: Amazon hates excuses. Every answer should be about solutions. The phrase 'we don't rely on excuses, we rely on solutions' is powerful and memorable." },
+    ]
+  },
+
+  // ── EP 5 ──────────────────────────────────────────
+  {
+    id: 5,
+    title: "Managing Multiple Tasks & Pressure",
+    cn: "同時多工同高壓情況",
+    what: "Amazon looks for: <strong>Operational discipline. Calm under pressure. Resilience. Deliver Results leadership principle.</strong>",
+    script: [
+      { role:"host",        text:"Episode 5 — Tell me about managing multiple tasks, and how you handle stressful situations." },
+      { role:"interviewer", text:"Tell me about a time when you managed multiple tasks all at once." },
+      { role:"answer",      text:"The Evri Christmas 2024 peak cover is the best example." },
+      { role:"answer",      text:"Situation: We had just secured a 24/7 Christmas peak contract for Evri in Warrington — the busiest period of the logistics year." },
+      { role:"answer",      text:"Task: We needed to manage round-the-clock shift scheduling, driver welfare, vehicle compliance, route planning, and financial tracking — all simultaneously." },
+      { role:"answer",      text:"Action: We divided responsibilities — Luca took compliance and vehicles, I managed drivers and finance. We ran daily briefings, maintained a real-time shift board, and stayed in constant communication." },
+      { role:"answer",      text:"Result: We completed the entire contract without a single failed shift. Every round was covered, every vehicle passed its daily check, and we delivered without fail." },
+      { role:"interviewer", text:"How do you handle stressful situations?" },
+      { role:"answer",      text:"Our Evri Christmas 2024 experience is the answer. 24/7 operations, peak volume, driver shortages — it was high pressure from day one." },
+      { role:"answer",      text:"We stayed calm, planned ahead, communicated clearly, and delivered." },
+      { role:"answer",      text:"Pressure is not something we fear — it's something we've proven we can handle." },
+      { role:"tip",         text:"Key tip: Always use the STAR method — Situation, Task, Action, Result. Amazon interviewers are trained to listen for this structure. Specifics matter — the more specific your example, the more credible you sound." },
+    ]
+  },
+
+  // ── EP 6 ──────────────────────────────────────────
+  {
+    id: 6,
+    title: "Leadership, Culture & Coaching",
+    cn: "領導力、團隊文化同培育",
+    what: "Amazon looks for: <strong>Grit, hands-on leadership, diversity, continuous improvement, customer obsession.</strong>",
+    script: [
+      { role:"host",        text:"Episode 6 — Leadership questions. What makes a great leader, what team culture would you create, and tell me about coaching someone." },
+      { role:"interviewer", text:"What makes a great leader?" },
+      { role:"answer",      text:"A great leader leads by example." },
+      { role:"answer",      text:"That's why both Luca and I remain licensed drivers and are prepared to step into any role when needed." },
+      { role:"answer",      text:"We don't ask our drivers to do anything we wouldn't do ourselves." },
+      { role:"interviewer", text:"What team culture would you create at Amazon as a Freight Partner?" },
+      { role:"answer",      text:"Our culture is built on what we call the 2R philosophy — Reliable and Responsible." },
+      { role:"answer",      text:"Every driver knows they represent Amazon to the customer. We foster a safety-first environment, encourage drivers to raise issues without fear, and reward consistent performance." },
+      { role:"answer",      text:"We believe happy, respected drivers deliver better results." },
+      { role:"interviewer", text:"If I asked you to describe your company culture in three words, what would they be?" },
+      { role:"answer",      text:"Reliable. Responsible. Resilient." },
+      { role:"answer",      text:"Reliable — every driver, every shift, every round is covered. No excuses." },
+      { role:"answer",      text:"Responsible — safety first, CPC compliance, we own our mistakes and fix them." },
+      { role:"answer",      text:"Resilient — Evri Christmas 24/7. We don't fold under pressure." },
+      { role:"tip",         text:"Key tip: The Three Words question is specifically mentioned in Amazon's official AFP FAQ as a real interview question. Prepare your three words and be ready to explain each one clearly." },
+    ]
+  },
+
+  // ── EP 7 ──────────────────────────────────────────
+  {
+    id: 7,
+    title: "Building a Team — Evri Christmas Story",
+    cn: "建立團隊 — 聖誕 Evri 實例",
+    what: "Amazon looks for: <strong>Recruiting, hiring, coaching capability. Building partnerships. Deliver Results.</strong>",
+    script: [
+      { role:"host",        text:"Episode 7 — Tell me about a time you built a team to accomplish a goal. This is your Evri Christmas recruitment story." },
+      { role:"interviewer", text:"Describe a time when you constructed a team to accomplish a goal." },
+      { role:"answer",      text:"Situation: In late November 2024, we secured a 24/7 Christmas peak contract for Evri Warrington with very short lead time." },
+      { role:"answer",      text:"Task: We needed to rapidly build a team capable of running round-the-clock operations across multiple shifts throughout the peak Christmas period." },
+      { role:"answer",      text:"Action: We recruited drivers at pace, ran safety briefings and inductions for each new driver, created a rolling shift schedule to ensure 24/7 coverage, and maintained daily communication with the whole team." },
+      { role:"answer",      text:"Result: We built that team from scratch and delivered the full contract successfully — zero missed shifts, zero compliance failures." },
+      { role:"interviewer", text:"Tell me about a time you coached someone to improve their performance." },
+      { role:"answer",      text:"Situation: Early in our operations, one of our drivers was consistently late starting shifts, which risked round completion times." },
+      { role:"answer",      text:"Task: I needed to address this without damaging his confidence or causing him to leave the team." },
+      { role:"answer",      text:"Action: I had a one-to-one conversation — not a formal disciplinary, but a genuine discussion about what was causing the lateness. It turned out to be a personal scheduling issue. We adjusted his shift times slightly to fit his circumstances." },
+      { role:"answer",      text:"Result: His punctuality improved immediately. He became one of our most reliable drivers and stayed with us throughout the Evri peak contract." },
+      { role:"tip",         text:"Key tip: Amazon's Hire and Develop the Best principle is about nurturing people, not just recruiting them. Show that you care about your drivers as people, not just as resources." },
+    ]
+  },
+
+  // ── EP 8 ──────────────────────────────────────────
+  {
+    id: 8,
+    title: "Difficult Decisions, Errors & Setbacks",
+    cn: "錯誤決定、失誤同挫折",
+    what: "Amazon looks for: <strong>Accountability, growth mindset, honesty about setbacks, learning from failure.</strong>",
+    script: [
+      { role:"host",        text:"Episode 8 — Difficult situations: bad decisions, errors, and setbacks. Amazon wants to see accountability and a growth mindset — not perfection." },
+      { role:"interviewer", text:"Tell me about a time when you made a bad decision or an error. What did you do?" },
+      { role:"answer",      text:"Situation: Early in our relay operations, we accepted a load without properly checking the vehicle's tyre condition first — we were eager to hit our numbers." },
+      { role:"answer",      text:"Task: Mid-journey, we noticed a slow puncture. We had to make a decision that would affect our delivery commitment." },
+      { role:"answer",      text:"Action: We immediately pulled over safely, arranged roadside assistance, and proactively called the station to give them maximum notice to reassign the load if needed." },
+      { role:"answer",      text:"Result: The load was delayed, but because we communicated early, the station could manage it. More importantly, we implemented a strict pre-departure vehicle check process after this — which has prevented any similar issues since." },
+      { role:"interviewer", text:"Describe a time you didn't achieve the results you were looking for." },
+      { role:"answer",      text:"When we first started Amazon Relay, our acceptance rate wasn't where we wanted it to be. We were being selective about loads which was affecting our standing." },
+      { role:"answer",      text:"We reviewed our approach, adjusted our availability windows, and became more systematic about which loads we accepted. Within a few weeks, our metrics improved significantly." },
+      { role:"tip",         text:"Key tip: Never avoid the bad decision question. Amazon actually respects candidates who openly discuss failures — it shows self-awareness and a learning mindset. The key is: acknowledge it, explain what you did immediately, and explain what you changed." },
+    ]
+  },
+
+  // ── EP 9 ──────────────────────────────────────────
+  {
+    id: 9,
+    title: "Safety & Compliance",
+    cn: "安全與合規 — Luca 主力答",
+    what: "Amazon looks for: <strong>Rigid safety-first culture, serviceable vehicles, driver hours compliance, DOT/DVSA regulations.</strong>",
+    script: [
+      { role:"host",        text:"Episode 9 — Safety and compliance. This is Luca's primary area. Amazon takes safety extremely seriously and this section can make or break the interview." },
+      { role:"interviewer", text:"How would you promote safety within your team?" },
+      { role:"answer",      text:"Safety is Luca's primary responsibility as our Licensed Transport Manager." },
+      { role:"answer",      text:"We run regular vehicle safety checks before every shift. We enforce driver hours strictly in line with EU and DVSA regulations." },
+      { role:"answer",      text:"We conduct driver briefings on hazard awareness, maintain full service records on all vehicles, and ensure every driver understands that no delivery is worth compromising safety." },
+      { role:"answer",      text:"Safety is not a box we tick — it is the foundation of how we operate." },
+      { role:"interviewer", text:"What would you do if a driver reported a vehicle defect mid-shift?" },
+      { role:"answer",      text:"The driver would pull over immediately. We have a clear protocol: stop the vehicle safely, report to us directly, and we arrange recovery or a replacement vehicle." },
+      { role:"answer",      text:"No driver would ever be asked to continue operating an unsafe vehicle. The pressure to complete rounds never overrides vehicle safety." },
+      { role:"interviewer", text:"Tell me about the DVS contract situation — the Direct Vision Standard." },
+      { role:"answer",      text:"Situation: We were offered a London contract that required DVS compliance, but our vehicle didn't have it installed yet." },
+      { role:"answer",      text:"Task: We had to make an immediate compliance decision under commercial pressure." },
+      { role:"answer",      text:"Action: We immediately rejected the contract so Amazon could reassign without delay. We prioritised Amazon's operation over our own revenue. Then arranged DVS installation before accepting any similar contracts." },
+      { role:"answer",      text:"Result: Zero compliance breach. Amazon could reassign the load without disruption. And our vehicle was DVS compliant from that point forward." },
+      { role:"tip",         text:"Key tip: The DVS story is powerful because it shows you put compliance above money. Amazon's Insist on High Standards principle is exactly this — don't cut corners even when it costs you." },
+    ]
+  },
+
+  // ── EP 10 ──────────────────────────────────────────
+  {
+    id: 10,
+    title: "Financial Management & Cost Control",
+    cn: "財務管理同成本控制 — Eric 主力答",
+    what: "Amazon looks for: <strong>Financial acumen, P&L management experience, systematic cost tracking.</strong>",
+    script: [
+      { role:"host",        text:"Episode 10 — Financial management. This is Eric's primary area. Amazon wants to see strong financial discipline and business acumen." },
+      { role:"interviewer", text:"Describe a time when you needed to make adjustments to reduce costs." },
+      { role:"answer",      text:"Situation: During our relay operations, we noticed our fuel costs per mile were higher than they should be for our vehicle weight class." },
+      { role:"answer",      text:"Task: We needed to identify the cause and reduce operational costs without compromising service." },
+      { role:"answer",      text:"Action: I analysed our route data and identified that some loads were taking inefficient routes due to sat-nav choices. We also reviewed idling time and introduced driver briefings on fuel-efficient driving." },
+      { role:"answer",      text:"Result: We reduced our average fuel cost per trip by around fifteen percent over six weeks." },
+      { role:"interviewer", text:"How do you manage your P and L as a business?" },
+      { role:"answer",      text:"I track every job individually — revenue per trip versus cost including fuel, driver time, and vehicle wear. I run a weekly financial review and flag anything that's underperforming." },
+      { role:"answer",      text:"For AFP, I've already modelled the cost structure for a ten-truck operation — I understand the fixed costs, variable costs, and the margin we need to maintain." },
+      { role:"tip",         text:"Key tip: Mention specific numbers where possible — even rough ones. Saying 'reduced costs by 15 percent' is far more credible than saying 'we improved efficiency.' Amazon is a data-driven company." },
+    ]
+  },
+
+  // ── EP 11 ──────────────────────────────────────────
+  {
+    id: 11,
+    title: "Why Lionrock is Ready for AFP",
+    cn: "點解 Lionrock 準備好做 AFP？",
+    what: "Amazon looks for: <strong>Alignment with Leadership Principles, 24/7 capability, compliance, reliability and accountability.</strong>",
+    script: [
+      { role:"host",        text:"Episode 11 — The closing argument. Why is Lionrock Haulage ready for AFP, and how will you be an asset to Amazon? This is your chance to bring everything together." },
+      { role:"interviewer", text:"Why do you believe your company is ready for AFP? How will you be an asset to Amazon?" },
+      { role:"answer",      text:"We bring four things Amazon needs." },
+      { role:"answer",      text:"First — regulatory compliance. Luca is a CPC-qualified Licensed Transport Manager. We are fully compliant with UK transport law and DVSA regulations." },
+      { role:"answer",      text:"Second — operational familiarity. We're not starting from zero. We worked inside AFP stations. We know how the systems work — scanning, manifests, station protocols." },
+      { role:"answer",      text:"Third — 24/7 proven capability. Our Evri Christmas 2024 cover proved we can sustain round-the-clock operations. We have the mindset and the experience." },
+      { role:"answer",      text:"And fourth — our 2R philosophy: Reliable and Responsible. We don't make promises we can't keep, and we don't offer excuses when things get hard." },
+      { role:"interviewer", text:"What are your impressions of Amazon as a partner?" },
+      { role:"answer",      text:"What impressed us most is the consistency. Regardless of which station or region you're in, the systems are unified, efficient, and standardised." },
+      { role:"answer",      text:"That makes training easier, reduces errors, and creates a reliable experience for customers. It's a model we believe in and want to operate within long-term." },
+      { role:"tip",         text:"Key tip: End strong. The four-point answer — compliance, familiarity, 24/7 capability, 2R philosophy — is memorable and structured. Amazon interviewers take notes. Give them something concrete to write down." },
+    ]
+  },
+
+  // ── EP 12 ──────────────────────────────────────────
+  {
+    id: 12,
+    title: "Your Questions to Ask Amazon",
+    cn: "你要問 Amazon 既問題",
+    what: "Good questions show strategic thinking, long-term commitment, and genuine understanding of the programme.",
+    script: [
+      { role:"host",        text:"Episode 12 — Your questions to ask Amazon at the end of the interview. Always prepare good questions. This shows you're serious, strategic, and thinking long-term." },
+      { role:"host",        text:"Question one — about financial requirements." },
+      { role:"interviewer", text:"Question 1: Regarding the O-licence financial standing requirement — my understanding is that the requirement is based on maintaining the O-licence, not the total business cost. Could you confirm the exact figures per vehicle, so I can project the requirement for a ten-truck fleet?" },
+      { role:"tip",         text:"Why this is a good question: It shows you already know about O-licence financial standing, and you're thinking about scaling to ten trucks. This signals long-term planning." },
+      { role:"host",        text:"Question two — about yard provision." },
+      { role:"interviewer", text:"Question 2: Regarding operating centre and yard requirements — does Amazon provide yard space or facilities, or do we need to secure our own yard independently for a ten-truck operation?" },
+      { role:"tip",         text:"Why this is a good question: Yard and operating centre are real practical requirements for an O-licence. Asking this shows operational awareness." },
+      { role:"host",        text:"Question three — about using your own trucks." },
+      { role:"interviewer", text:"Question 3: We already have our own HGV vehicles. Can we use our own trucks to run AFP, or is there a requirement to use Amazon-leased vehicles? And if our own trucks are acceptable, is there a maximum vehicle age?" },
+      { role:"tip",         text:"Why this is a good question: Amazon does allow own vehicles under 5 years old. Asking confirms you've researched this, and gives Amazon the chance to clarify the policy directly." },
+      { role:"host",        text:"Question four — about O-licence slots." },
+      { role:"interviewer", text:"Question 4: Regarding our O-licence — would you recommend we apply for a new licence specifically for the AFP operation, or can we add vehicles as additional authorised slots to our existing licence? And if we start with two or three trucks, can we increase the authorisation incrementally as we scale?" },
+      { role:"tip",         text:"Why this is a good question: This is a very practical question that shows you understand the O-licence system. Amazon will appreciate that you're thinking about the right way to structure the legal framework." },
+      { role:"host",        text:"Question five — about base location." },
+      { role:"interviewer", text:"Question 5: Our operating centre is in Manchester — specifically Manchester 8. Is it possible for us to be based at or near a Manchester AFP station rather than Warrington? If not, that is absolutely fine — we just want to understand the options." },
+      { role:"tip",         text:"Why this is a good question: It shows geographic awareness and forward planning. It's polite and flexible — you're not demanding, just asking. This is the right tone." },
+      { role:"host",        text:"That's the end of Episode 12 and the end of your AFP Interview Podcast. Listen to all twelve episodes as many times as you need. The more you hear these answers, the more naturally they will come out in the real interview. Good luck, Lionrock Haulage. You are ready." },
+    ]
+  },
+
+];
+
+// ═══════════════════════════════════════════════════════
+// PLAYER ENGINE
+// ═══════════════════════════════════════════════════════
+let currentEp = 0;
+let currentSeg = 0;
+let isPlaying = false;
+let speechRate = 1.0;
+let synth = window.speechSynthesis;
+let voices = [];
+let doneEpisodes = new Set();
+
+// Load voices
+function loadVoices() {
+  voices = synth.getVoices();
+}
+loadVoices();
+if (speechSynthesis.onvoiceschanged !== undefined) {
+  speechSynthesis.onvoiceschanged = loadVoices;
+}
+
+function getVoice(role) {
+  // Try to get distinct voices for different roles
+  const enVoices = voices.filter(v => v.lang.startsWith('en'));
+  const ukVoices = enVoices.filter(v => v.lang === 'en-GB');
+  const usVoices = enVoices.filter(v => v.lang === 'en-US');
+  const allEn = [...ukVoices, ...usVoices, ...enVoices];
+
+  if (role === 'interviewer') {
+    // Try to find a male/different voice
+    const male = allEn.find(v => v.name.includes('Male') || v.name.includes('Daniel') || v.name.includes('David') || v.name.includes('Google UK English Male'));
+    return male || (allEn[1] || allEn[0] || null);
+  }
+  if (role === 'answer') {
+    const ukMale = ukVoices.find(v => v.name.includes('Male') || v.name.includes('Daniel'));
+    return ukMale || ukVoices[0] || allEn[0] || null;
+  }
+  if (role === 'tip') {
+    const female = allEn.find(v => v.name.includes('Female') || v.name.includes('Serena') || v.name.includes('Google UK English Female') || v.name.includes('Karen'));
+    return female || allEn[allEn.length - 1] || null;
+  }
+  // host
+  return allEn[0] || null;
+}
+
+function getRoleConfig(role) {
+  switch(role) {
+    case 'host':        return { label:'HOST / NARRATOR', pitch:1.05, rateAdj:0.97, color:'host' };
+    case 'interviewer': return { label:'INTERVIEWER (AMAZON)', pitch:0.95, rateAdj:0.93, color:'interviewer' };
+    case 'answer':      return { label:'YOUR ANSWER', pitch:1.0, rateAdj:1.0, color:'answer' };
+    case 'tip':         return { label:'💡 KEY TIP', pitch:1.1, rateAdj:0.95, color:'tip' };
+    default:            return { label:'—', pitch:1.0, rateAdj:1.0, color:'host' };
+  }
+}
+
+function speakSegment(epIdx, segIdx) {
+  synth.cancel();
+  const ep = PODCAST[epIdx];
+  if (!ep || segIdx >= ep.script.length) {
+    // Move to next episode
+    if (epIdx + 1 < PODCAST.length) {
+      doneEpisodes.add(epIdx);
+      updateEpList();
+      setTimeout(() => { currentEp = epIdx + 1; currentSeg = 0; speakSegment(currentEp, 0); }, 1200);
+    } else {
+      isPlaying = false;
+      updatePlayBtn();
+      updatePlayBtnDrive();
+      doneEpisodes.add(epIdx);
+      updateEpList();
+    }
+    return;
+  }
+
+  currentEp = epIdx;
+  currentSeg = segIdx;
+
+  const seg = ep.script[segIdx];
+  const cfg = getRoleConfig(seg.role);
+  const voice = getVoice(seg.role);
+
+  // Update UI
+  updateNowPlaying(ep, segIdx, cfg, seg.text);
+
+  // Speak
+  const utter = new SpeechSynthesisUtterance(seg.text);
+  utter.rate = speechRate * cfg.rateAdj;
+  utter.pitch = cfg.pitch;
+  if (voice) utter.voice = voice;
+
+  utter.onend = () => {
+    if (isPlaying) {
+      const pause = seg.role === 'tip' ? 800 : seg.role === 'interviewer' ? 400 : 200;
+      setTimeout(() => speakSegment(epIdx, segIdx + 1), pause);
+    }
+  };
+
+  utter.onerror = (e) => {
+    if (e.error !== 'interrupted') {
+      setTimeout(() => speakSegment(epIdx, segIdx + 1), 300);
+    }
+  };
+
+  synth.speak(utter);
+}
+
+function updateNowPlaying(ep, segIdx, cfg, text) {
+  document.getElementById('ep-badge').textContent = 'EP ' + ep.id;
+  document.getElementById('ep-title').textContent = ep.title;
+  document.getElementById('ep-cn').textContent = ep.cn;
+  document.getElementById('ep-what').innerHTML = ep.what;
+
+  const roleEl = document.getElementById('script-role');
+  roleEl.className = 'script-role ' + cfg.color;
+  document.getElementById('role-label').textContent = cfg.label;
+  document.getElementById('script-text').textContent = text;
+
+  const fill = ((segIdx + 1) / ep.script.length) * 100;
+  document.getElementById('progress-fill').style.width = fill + '%';
+  document.getElementById('prog-cur').textContent = (segIdx + 1) + ' / ' + ep.script.length;
+  document.getElementById('prog-ep').textContent = 'Episode ' + ep.id + ' of ' + PODCAST.length;
+
+  // Drive mode update
+  document.getElementById('drive-ep-title').textContent = ep.title;
+  document.getElementById('drive-script').textContent = text;
+  document.getElementById('drive-progress').textContent = 'EP ' + ep.id + ' — ' + (segIdx+1) + ' / ' + ep.script.length + ' segments';
+
+  updateEpList();
+}
+
+function togglePlay() {
+  if (isPlaying) {
+    synth.cancel();
+    isPlaying = false;
+  } else {
+    isPlaying = true;
+    speakSegment(currentEp, currentSeg);
+  }
+  updatePlayBtn();
+  updatePlayBtnDrive();
+}
+
+function updatePlayBtn() {
+  document.getElementById('btn-play').textContent = isPlaying ? '⏸' : '▶';
+  document.getElementById('drive-btn-play').textContent = isPlaying ? '⏸' : '▶';
+}
+function updatePlayBtnDrive() {
+  document.getElementById('drive-btn-play').textContent = isPlaying ? '⏸' : '▶';
+}
+
+function nextEpisode() {
+  synth.cancel();
+  doneEpisodes.add(currentEp);
+  if (currentEp < PODCAST.length - 1) {
+    currentEp++;
+    currentSeg = 0;
+    if (isPlaying) speakSegment(currentEp, currentSeg);
+    else updateNowPlaying(PODCAST[currentEp], 0, getRoleConfig(PODCAST[currentEp].script[0].role), PODCAST[currentEp].script[0].text);
+  }
+  updateEpList();
+}
+
+function prevEpisode() {
+  synth.cancel();
+  if (currentEp > 0) {
+    currentEp--;
+    currentSeg = 0;
+    if (isPlaying) speakSegment(currentEp, currentSeg);
+    else updateNowPlaying(PODCAST[currentEp], 0, getRoleConfig(PODCAST[currentEp].script[0].role), PODCAST[currentEp].script[0].text);
+  }
+  updateEpList();
+}
+
+function skipSegment() {
+  synth.cancel();
+  const ep = PODCAST[currentEp];
+  if (currentSeg < ep.script.length - 1) {
+    currentSeg++;
+    if (isPlaying) speakSegment(currentEp, currentSeg);
+    else {
+      const seg = ep.script[currentSeg];
+      updateNowPlaying(ep, currentSeg, getRoleConfig(seg.role), seg.text);
+    }
+  } else {
+    nextEpisode();
+  }
+}
+
+function replaySegment() {
+  synth.cancel();
+  if (isPlaying) speakSegment(currentEp, currentSeg);
+}
+
+function setSpeed(s) {
+  speechRate = s;
+  document.querySelectorAll('.speed-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  if (isPlaying) {
+    synth.cancel();
+    setTimeout(() => speakSegment(currentEp, currentSeg), 100);
+  }
+}
+
+function jumpToEp(idx) {
+  synth.cancel();
+  currentEp = idx;
+  currentSeg = 0;
+  const ep = PODCAST[idx];
+  const seg = ep.script[0];
+  updateNowPlaying(ep, 0, getRoleConfig(seg.role), seg.text);
+  if (isPlaying) speakSegment(currentEp, 0);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Build episode list
+function buildEpList() {
+  const container = document.getElementById('ep-list');
+  container.innerHTML = '';
+  PODCAST.forEach((ep, idx) => {
+    const div = document.createElement('div');
+    div.className = 'ep-item' + (idx === currentEp ? ' active' : '') + (doneEpisodes.has(idx) ? ' done' : '');
+    div.id = 'ep-item-' + idx;
+    div.onclick = () => jumpToEp(idx);
+    div.innerHTML = `
+      <div class="ep-num">${doneEpisodes.has(idx) ? '✓' : ep.id}</div>
+      <div class="ep-info">
+        <div class="ep-name">${ep.title}</div>
+        <div class="ep-meta">${ep.cn} · ${ep.script.length} segments</div>
+      </div>
+    `;
+    container.appendChild(div);
+  });
+}
+
+function updateEpList() {
+  PODCAST.forEach((ep, idx) => {
+    const item = document.getElementById('ep-item-' + idx);
+    if (!item) return;
+    item.className = 'ep-item' + (idx === currentEp ? ' active' : '') + (doneEpisodes.has(idx) ? ' done' : '');
+    item.querySelector('.ep-num').textContent = doneEpisodes.has(idx) ? '✓' : ep.id;
+  });
+}
+
+// Drive mode
+function enterDriveMode() {
+  document.getElementById('drive-overlay').classList.add('visible');
+  // Update drive display
+  const ep = PODCAST[currentEp];
+  document.getElementById('drive-ep-title').textContent = ep.title;
+  document.getElementById('drive-script').textContent = ep.script[currentSeg]?.text || '';
+  document.getElementById('drive-progress').textContent = 'EP ' + ep.id + ' — ' + (currentSeg+1) + ' / ' + ep.script.length;
+}
+function exitDriveMode() {
+  document.getElementById('drive-overlay').classList.remove('visible');
+}
+
+// Init
+buildEpList();
+const firstEp = PODCAST[0];
+const firstSeg = firstEp.script[0];
+updateNowPlaying(firstEp, 0, getRoleConfig(firstSeg.role), 'Press ▶ to start your AFP interview prep podcast.');
+</script>
+</body>
+</html>
