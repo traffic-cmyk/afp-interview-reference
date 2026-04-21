@@ -271,6 +271,56 @@
   }
   .closing strong { color: #00c853; font-style: normal; }
   .closing .cn { color: #5a7a5a; font-size: 11px; margin-top: 5px; font-style: normal; }
+
+  /* ── MOBILE RESPONSIVE ── */
+  @media (max-width: 700px) {
+    body { font-size: 13px; }
+
+    .header { padding: 8px 10px 6px; }
+    .header h1 { font-size: 15px; }
+    .header-sub { font-size: 11px; flex-wrap: wrap; gap: 4px; }
+    .tag { font-size: 10px; padding: 3px 8px; }
+
+    /* All multi-col grids → single column */
+    .grid      { grid-template-columns: 1fr; padding: 6px; }
+    .grid-2    { grid-template-columns: 1fr; padding: 0 6px 6px; }
+    .roles     { grid-template-columns: 1fr; }
+    .star-grid { grid-template-columns: 1fr 1fr; gap: 5px; }
+    .lp-grid   { grid-template-columns: 1fr; gap: 5px; }
+
+    .full { padding: 0 6px 6px; }
+    .section-label { padding: 4px 6px 2px; }
+
+    .card { padding: 8px 10px; }
+    .card h2 { font-size: 11px; }
+
+    .star-text { font-size: 12px; }
+    .lp-text .star-row .star-text { font-size: 11px; }
+
+    .story { gap: 7px; }
+    .story-title { font-size: 12px; }
+
+    .lp-item { padding: 6px 8px; }
+    .lp-text strong { font-size: 12px; }
+
+    /* Q&A table → stack vertically on mobile */
+    .qa td { display: block; width: 100% !important; padding: 3px 4px; }
+    .qa td:first-child {
+      font-size: 12px;
+      padding-bottom: 1px;
+      border-bottom: none;
+    }
+    .qa td:last-child { padding-top: 2px; padding-bottom: 6px; }
+    .qa tr { display: block; border-bottom: 1px solid #2a3048; padding: 4px 0; }
+  }
+
+  @media (max-width: 420px) {
+    .header h1 { font-size: 13px; }
+    .star-grid { grid-template-columns: 1fr 1fr; }
+    .star-letter { font-size: 18px; }
+    .star-text { font-size: 11.5px; }
+    .card { padding: 7px 8px; }
+  }
 </style>
 </head>
 <body>
