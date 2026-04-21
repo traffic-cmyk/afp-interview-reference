@@ -191,10 +191,14 @@
     font-size: 11px;
     min-width: 16px;
   }
-  .lp-text { font-size: 11px; color: #c8cdd8; }
-  .lp-text strong { color: #fff; display: block; }
+  .lp-text { font-size: 11px; color: #c8cdd8; flex: 1; }
+  .lp-text strong { color: #fff; display: block; margin-bottom: 3px; }
   .lp-text .lp-cn { color: #8892a4; font-size: 10px; display: block; margin-bottom: 1px; }
   .lp-text span { color: #8892a4; font-size: 10px; }
+  .lp-text .star-row { margin-bottom: 2px; }
+  .lp-text .star-row .stag { font-size: 8px; padding: 1px 3px; min-width: 12px; }
+  .lp-text .star-row .star-text { font-size: 10.5px; }
+  .lp-text .lp-result-cn { font-size: 9.5px; color: #4a7a5a; margin-left: 18px; margin-top: 0; margin-bottom: 3px; }
 
   /* HIGHLIGHT BOX */
   .highlight {
@@ -661,118 +665,151 @@
   <div class="card amber">
     <h2>🏆 16 Leadership Principles — What to Say 點答</h2>
     <div class="lp-grid">
-      <div class="lp-item">
-        <div class="lp-num">1</div>
-        <div class="lp-text">
-          <strong>Customer Obsession 顧客至上</strong>
-          <span>Evri Christmas — personally drove out to cover delayed stops. Every parcel delivered. 親自出車確保每件包裹送到</span>
-        </div>
-      </div>
-      <div class="lp-item">
-        <div class="lp-num">2</div>
-        <div class="lp-text">
-          <strong>Ownership 主人翁精神</strong>
-          <span>Driver sick → we step in. Vehicle down → we fix it. No excuses. Total accountability. 司機病咗老闆頂，冇藉口全責</span>
-        </div>
-      </div>
-      <div class="lp-item">
-        <div class="lp-num">3</div>
-        <div class="lp-text">
-          <strong>Invent &amp; Simplify 創新簡化</strong>
-          <span>Built load cost calculator → eliminated unprofitable loads. Margin improved 15–20%. 自建成本計算工具，利潤提升 15-20%</span>
-        </div>
-      </div>
-      <div class="lp-item">
-        <div class="lp-num">4</div>
-        <div class="lp-text">
-          <strong>Are Right, A Lot 判斷正確</strong>
-          <span>Transitioned to contracted work despite pushback — Evri contract followed. 堅持轉做合約，事後証明正確</span>
-        </div>
-      </div>
-      <div class="lp-item">
-        <div class="lp-num">5</div>
-        <div class="lp-text">
-          <strong>Learn &amp; Be Curious 學習求知</strong>
-          <span>Started as drivers. Self-taught P&L, tachograph analysis, fleet compliance. Still learning. 由司機自學財務合規</span>
-        </div>
-      </div>
-      <div class="lp-item">
-        <div class="lp-num">6</div>
-        <div class="lp-text">
-          <strong>Hire &amp; Develop the Best 招募培育</strong>
-          <span>Every driver personally interviewed + inducted. Coached driver on hours — now our best. 親自面試帶領每位司機</span>
-        </div>
-      </div>
-      <div class="lp-item">
-        <div class="lp-num">7</div>
-        <div class="lp-text">
-          <strong>Insist on High Standards 高標準</strong>
-          <span>Grounded vehicle mid-shift. Refused client request to extend driver hours illegally. 車有問題即停，拒絕違規</span>
-        </div>
-      </div>
-      <div class="lp-item">
-        <div class="lp-num">8</div>
-        <div class="lp-text">
-          <strong>Think Big 宏觀思維</strong>
-          <span>AFP was goal from day one. Every step — Relay, clients, Evri — was intentional. AFP 係由第一天開始既目標</span>
-        </div>
-      </div>
-      <div class="lp-item">
-        <div class="lp-num">9</div>
-        <div class="lp-text">
-          <strong>Bias for Action 主動行動</strong>
-          <span>Immediately started Relay while waiting for AFP. Committed to Evri before full team confirmed. 等批核期間即刻行動</span>
-        </div>
-      </div>
-      <div class="lp-item">
-        <div class="lp-num">10</div>
-        <div class="lp-text">
-          <strong>Frugality 節儉</strong>
-          <span>Built profitable multi-client operation with minimal capital. Weekly P&L. Eliminated loss-making loads. 小本創業，嚴控損益</span>
-        </div>
-      </div>
-      <div class="lp-item">
-        <div class="lp-num">11</div>
-        <div class="lp-text">
-          <strong>Earn Trust 建立信任</strong>
-          <span>Accepted loss-making load → told partner immediately, no excuses. Transparency builds trust. 透明誠實建立信任</span>
-        </div>
-      </div>
-      <div class="lp-item">
-        <div class="lp-num">12</div>
-        <div class="lp-text">
-          <strong>Dive Deep 深入細節</strong>
-          <span>Weekly tachograph review per driver. Per-load tracking. Caught hours issue before breach. 每週逐個司機核查工時</span>
-        </div>
-      </div>
-      <div class="lp-item">
-        <div class="lp-num">13</div>
-        <div class="lp-text">
-          <strong>Have Backbone 有骨氣</strong>
-          <span>Client pressured driver hours extension → firmly refused, offered alternatives. Client stayed. 拒絕客戶非法要求，提供替代方案</span>
-        </div>
-      </div>
-      <div class="lp-item">
-        <div class="lp-num">14</div>
-        <div class="lp-text">
-          <strong>Deliver Results 兌現成果</strong>
-          <span>Evri Christmas 2024. 24/7. Zero missed shifts. Zero failed deliveries. Completed in full. 零缺席，零失敗，全完成</span>
-        </div>
-      </div>
-      <div class="lp-item">
-        <div class="lp-num">15</div>
-        <div class="lp-text">
-          <strong>Best Employer 最佳僱主</strong>
-          <span>Know every driver personally. Safety = no reprimand. Drivers returned after peak by choice. 司機主動回來再做</span>
-        </div>
-      </div>
-      <div class="lp-item">
-        <div class="lp-num">16</div>
-        <div class="lp-text">
-          <strong>Broad Responsibility 廣泛責任</strong>
-          <span>Amazon-branded trucks = we represent Amazon on every road, every day. We take that personally. 每部車都代表 Amazon</span>
-        </div>
-      </div>
+
+      <div class="lp-item"><div class="lp-num">1</div><div class="lp-text">
+        <strong>Customer Obsession 顧客至上</strong>
+        <div class="star-row"><span class="stag s">S</span><span class="star-text">Evri peak — stop running seriously delayed mid-round</span></div>
+        <div class="star-row"><span class="stag t">T</span><span class="star-text">Ensure customer received parcel that same day</span></div>
+        <div class="star-row"><span class="stag a">A</span><span class="star-text">Personally drove out to cover the delayed stop</span></div>
+        <div class="star-row"><span class="stag r">R</span><span class="star-text"><strong>Every parcel delivered. Zero failed deliveries during peak</strong></span></div>
+        <div class="lp-result-cn">親自出車確保每件包裹送到，零失敗</div>
+      </div></div>
+
+      <div class="lp-item"><div class="lp-num">2</div><div class="lp-text">
+        <strong>Ownership 主人翁精神</strong>
+        <div class="star-row"><span class="stag s">S</span><span class="star-text">Driver called in sick — round unassigned, no cover available</span></div>
+        <div class="star-row"><span class="stag t">T</span><span class="star-text">Cover round with zero disruption to Amazon deliveries</span></div>
+        <div class="star-row"><span class="stag a">A</span><span class="star-text">Director stepped in personally — both hold valid HGV licences, always on standby</span></div>
+        <div class="star-row"><span class="stag r">R</span><span class="star-text"><strong>Zero disruption. Round completed. "Solutions, not excuses."</strong></span></div>
+        <div class="lp-result-cn">老闆頂替出車，零中斷，冇藉口全責</div>
+      </div></div>
+
+      <div class="lp-item"><div class="lp-num">3</div><div class="lp-text">
+        <strong>Invent &amp; Simplify 創新簡化</strong>
+        <div class="star-row"><span class="stag s">S</span><span class="star-text">Accepting Relay loads without clear view of true profitability per load</span></div>
+        <div class="star-row"><span class="stag t">T</span><span class="star-text">Know true margin on every load before committing</span></div>
+        <div class="star-row"><span class="stag a">A</span><span class="star-text">Built a cost calculator tool — fuel, time, wear analysed per load</span></div>
+        <div class="star-row"><span class="stag r">R</span><span class="star-text"><strong>Eliminated unprofitable loads. Margin improved 15–20%</strong></span></div>
+        <div class="lp-result-cn">自建計算工具，砍走無利潤工作，利潤升 15-20%</div>
+      </div></div>
+
+      <div class="lp-item"><div class="lp-num">4</div><div class="lp-text">
+        <strong>Are Right, A Lot 判斷正確</strong>
+        <div class="star-row"><span class="stag s">S</span><span class="star-text">Running inconsistent ad-hoc Relay loads — unpredictable revenue</span></div>
+        <div class="star-row"><span class="stag t">T</span><span class="star-text">Decide: stay ad-hoc or commit to contracted operations?</span></div>
+        <div class="star-row"><span class="stag a">A</span><span class="star-text">Made the call to transition despite driver resistance</span></div>
+        <div class="star-row"><span class="stag r">R</span><span class="star-text"><strong>Evri contract followed. Stable revenue. Decision proved correct</strong></span></div>
+        <div class="lp-result-cn">堅持決定，事後証明正確，Evri 合約隨之而來</div>
+      </div></div>
+
+      <div class="lp-item"><div class="lp-num">5</div><div class="lp-text">
+        <strong>Learn &amp; Be Curious 學習求知</strong>
+        <div class="star-row"><span class="stag s">S</span><span class="star-text">Started as HGV drivers — zero business or finance background</span></div>
+        <div class="star-row"><span class="stag t">T</span><span class="star-text">Build a compliant, profitable logistics company from scratch</span></div>
+        <div class="star-row"><span class="stag a">A</span><span class="star-text">Self-taught P&amp;L, tachograph analysis, transport law, CPC qualification — still learning daily</span></div>
+        <div class="star-row"><span class="stag r">R</span><span class="star-text"><strong>CPC qualified TM. Profitable. AFP-ready. Never stopped learning</strong></span></div>
+        <div class="lp-result-cn">由司機自學到持牌 TM，從未停止進步</div>
+      </div></div>
+
+      <div class="lp-item"><div class="lp-num">6</div><div class="lp-text">
+        <strong>Hire &amp; Develop the Best 招募培育</strong>
+        <div class="star-row"><span class="stag s">S</span><span class="star-text">Needed reliable team fast for Evri Christmas peak</span></div>
+        <div class="star-row"><span class="stag t">T</span><span class="star-text">Recruit + develop drivers to standard quickly with no HR layer</span></div>
+        <div class="star-row"><span class="stag a">A</span><span class="star-text">Personally interviewed + inducted every driver. Coached one struggling on hours compliance</span></div>
+        <div class="star-row"><span class="stag r">R</span><span class="star-text"><strong>Team delivered Christmas contract. That driver is now our most reliable</strong></span></div>
+        <div class="lp-result-cn">親自面試培訓，最差嘅司機變成最可靠嘅</div>
+      </div></div>
+
+      <div class="lp-item"><div class="lp-num">7</div><div class="lp-text">
+        <strong>Insist on High Standards 高標準</strong>
+        <div class="star-row"><span class="stag s">S</span><span class="star-text">Vehicle defect found mid-shift + client pressuring illegal hours extension</span></div>
+        <div class="star-row"><span class="stag t">T</span><span class="star-text">Hold safety and legal standards under operational pressure</span></div>
+        <div class="star-row"><span class="stag a">A</span><span class="star-text">Grounded vehicle immediately. Firmly refused illegal request, offered legal alternatives</span></div>
+        <div class="star-row"><span class="stag r">R</span><span class="star-text"><strong>Zero safety incidents. Client accepted alternative. Client stayed</strong></span></div>
+        <div class="lp-result-cn">車有問題即停，拒絕違規，客戶留低</div>
+      </div></div>
+
+      <div class="lp-item"><div class="lp-num">8</div><div class="lp-text">
+        <strong>Think Big 宏觀思維</strong>
+        <div class="star-row"><span class="stag s">S</span><span class="star-text">Deciding what kind of logistics company to build from day one</span></div>
+        <div class="star-row"><span class="stag t">T</span><span class="star-text">Set the right long-term direction — not just the easiest path</span></div>
+        <div class="star-row"><span class="stag a">A</span><span class="star-text">AFP as primary goal on day of incorporation. Every step — Relay, Evri, clients — intentional</span></div>
+        <div class="star-row"><span class="stag r">R</span><span class="star-text"><strong>Here today at this interview. Every decision led to this moment</strong></span></div>
+        <div class="lp-result-cn">AFP 係第一天已係目標，今日每一步都係刻意為此</div>
+      </div></div>
+
+      <div class="lp-item"><div class="lp-num">9</div><div class="lp-text">
+        <strong>Bias for Action 主動行動</strong>
+        <div class="star-row"><span class="stag s">S</span><span class="star-text">AFP approval takes months — easy to sit idle and wait</span></div>
+        <div class="star-row"><span class="stag t">T</span><span class="star-text">Build experience and revenue without waiting for approval</span></div>
+        <div class="star-row"><span class="stag a">A</span><span class="star-text">Immediately activated Relay. Committed to Evri Christmas before full team confirmed</span></div>
+        <div class="star-row"><span class="stag r">R</span><span class="star-text"><strong>24/7 track record built. Multi-client proven. AFP-ready</strong></span></div>
+        <div class="lp-result-cn">等批核期間即刻行動，建立實戰紀錄</div>
+      </div></div>
+
+      <div class="lp-item"><div class="lp-num">10</div><div class="lp-text">
+        <strong>Frugality 節儉</strong>
+        <div class="star-row"><span class="stag s">S</span><span class="star-text">Started with minimal capital — no loans, no external investment</span></div>
+        <div class="star-row"><span class="stag t">T</span><span class="star-text">Build profitable multi-client operation on lean budget</span></div>
+        <div class="star-row"><span class="stag a">A</span><span class="star-text">Weekly P&amp;L per load. Cut loss-makers using cost calculator. Every pound tracked</span></div>
+        <div class="star-row"><span class="stag r">R</span><span class="star-text"><strong>Profitable, zero debt, multiple clients, ready to scale</strong></span></div>
+        <div class="lp-result-cn">小本創業，嚴控損益，全部有賺，零債務</div>
+      </div></div>
+
+      <div class="lp-item"><div class="lp-num">11</div><div class="lp-text">
+        <strong>Earn Trust 建立信任</strong>
+        <div class="star-row"><span class="stag s">S</span><span class="star-text">Accepted a Relay load that turned loss-making after fuel costs</span></div>
+        <div class="star-row"><span class="stag t">T</span><span class="star-text">Absorb quietly, or be fully transparent with partner?</span></div>
+        <div class="star-row"><span class="stag a">A</span><span class="star-text">Told partner immediately — full transparency, explained what happened, no excuses</span></div>
+        <div class="star-row"><span class="stag r">R</span><span class="star-text"><strong>Trust strengthened. Partner relationship continued long-term</strong></span></div>
+        <div class="lp-result-cn">即時坦白說明，唔諉過，夥伴關係因此更穩固</div>
+      </div></div>
+
+      <div class="lp-item"><div class="lp-num">12</div><div class="lp-text">
+        <strong>Dive Deep 深入細節</strong>
+        <div class="star-row"><span class="stag s">S</span><span class="star-text">Multiple drivers with varying routes — hours risk hard to spot</span></div>
+        <div class="star-row"><span class="stag t">T</span><span class="star-text">Ensure no driver near or over legal limit at any time</span></div>
+        <div class="star-row"><span class="stag a">A</span><span class="star-text">Weekly tachograph review per driver individually. Per-load financial tracking</span></div>
+        <div class="star-row"><span class="stag r">R</span><span class="star-text"><strong>Caught hours issue early — before breach. Zero compliance violations</strong></span></div>
+        <div class="lp-result-cn">每週逐個核查工時，提早發現問題，零違規</div>
+      </div></div>
+
+      <div class="lp-item"><div class="lp-num">13</div><div class="lp-text">
+        <strong>Have Backbone 有骨氣</strong>
+        <div class="star-row"><span class="stag s">S</span><span class="star-text">Client pressured us to extend driver hours beyond legal limit</span></div>
+        <div class="star-row"><span class="stag t">T</span><span class="star-text">Hold compliance line even at risk of losing the client</span></div>
+        <div class="star-row"><span class="stag a">A</span><span class="star-text">Firmly and clearly refused. Offered legal alternatives — reschedule, second driver</span></div>
+        <div class="star-row"><span class="stag r">R</span><span class="star-text"><strong>Client accepted alternative. Client stayed. Zero legal risk</strong></span></div>
+        <div class="lp-result-cn">拒絕違規要求，提供替代方案，客戶留低</div>
+      </div></div>
+
+      <div class="lp-item"><div class="lp-num">14</div><div class="lp-text">
+        <strong>Deliver Results 兌現成果</strong>
+        <div class="star-row"><span class="stag s">S</span><span class="star-text">Evri Christmas 2024 — 24/7, peak volume, driver shortages, no room for error</span></div>
+        <div class="star-row"><span class="stag t">T</span><span class="star-text">Complete entire contract without a single failure</span></div>
+        <div class="star-row"><span class="stag a">A</span><span class="star-text">Both directors managed scheduling, compliance, welfare and P&amp;L simultaneously</span></div>
+        <div class="star-row"><span class="stag r">R</span><span class="star-text"><strong>Zero missed shifts. Zero failed deliveries. Completed in full, on time</strong></span></div>
+        <div class="lp-result-cn">零缺席，零失敗，全部完成，準時交收</div>
+      </div></div>
+
+      <div class="lp-item"><div class="lp-num">15</div><div class="lp-text">
+        <strong>Best Employer 最佳僱主</strong>
+        <div class="star-row"><span class="stag s">S</span><span class="star-text">After Christmas peak — no obligation to retain all drivers</span></div>
+        <div class="star-row"><span class="stag t">T</span><span class="star-text">Build a team culture where drivers genuinely want to return</span></div>
+        <div class="star-row"><span class="stag a">A</span><span class="star-text">Knew every driver personally. Safety = no reprimand. Paid fairly. Led by example — we drive too</span></div>
+        <div class="star-row"><span class="stag r">R</span><span class="star-text"><strong>Drivers returned by choice. Strong retention. Team loyalty earned</strong></span></div>
+        <div class="lp-result-cn">司機主動選擇回來，係真心想留，唔係被迫</div>
+      </div></div>
+
+      <div class="lp-item"><div class="lp-num">16</div><div class="lp-text">
+        <strong>Broad Responsibility 廣泛責任</strong>
+        <div class="star-row"><span class="stag s">S</span><span class="star-text">AFP trucks carry Amazon branding on public roads every single day</span></div>
+        <div class="star-row"><span class="stag t">T</span><span class="star-text">Ensure every driver understands they represent Amazon, not just Lionrock</span></div>
+        <div class="star-row"><span class="stag a">A</span><span class="star-text">Train every driver: safety, professionalism and service = Amazon's reputation on the road</span></div>
+        <div class="star-row"><span class="stag r">R</span><span class="star-text"><strong>Zero incidents. Every driver owns the responsibility personally</strong></span></div>
+        <div class="lp-result-cn">每部車每天都代表 Amazon，每位司機都明白並親身承擔</div>
+      </div></div>
+
     </div>
   </div>
 </div>
